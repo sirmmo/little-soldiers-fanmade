@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "threat",
+  "name": "Volkare",
+  "confidence": "homebrew",
+  "flavor": "Magestone (Mage Knight) — a co-op boss reprising the great warlord Volkare, the iconic Mage Knight antagonist. Rival heroes must set aside their feud to break his host. Armor/Life tuned above the player curve for a boss.",
+  "stats": {
+    "defense": 5,
+    "toughness": 8
+  },
+  "target": "Volkare himself at the heart of his host; used for line-of-sight and range to him.",
+  "attack": {
+    "name": "Wrath of the Warlord",
+    "summary": "Every Threats' turn: place 1 Wound on all valid targets (his guard strikes), then 1 Wound on all Units in play whether valid targets or not (the host advances). Each Lightning rolled in the collective attack adds 1 more Wound to each valid target.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "heart",
+        "targets": "enemies",
+        "needsValidTarget": true,
+        "text": "Guard: 1 Wound on all valid targets."
+      },
+      {
+        "kind": "area_effect",
+        "count": 1,
+        "token": "heart",
+        "targets": "enemies",
+        "range": "any",
+        "needsValidTarget": false,
+        "text": "The host advances: 1 Wound on all Units in play."
+      }
+    ]
+  },
+  "superSpecialAbility": {
+    "trigger": "three_plus_lightning",
+    "summary": "Volley from the Host: on 3+ Lightning in the collective Threat attack, Volkare's whole army looses at once — place 2 Wounds on every Unit in play.",
+    "effects": [
+      {
+        "kind": "area_effect",
+        "count": 2,
+        "token": "heart",
+        "targets": "enemies",
+        "range": "any",
+        "needsValidTarget": false,
+        "trigger": "three_plus_lightning"
+      }
+    ]
+  },
+  "forceField": {
+    "switchNumbers": [
+      1,
+      2
+    ],
+    "requiresAllSwitches": true
+  },
+  "figureCandidates": [
+    { "name": "General Volkare", "set": "Resurrection", "rarity": "Rare", "collectorNumber": "21", "roleFit": "The Volkare figure itself — the natural centrepiece for this boss.", "verified": true },
+    { "name": "Za'Rax'As", "set": "Resurrection", "rarity": "Unique", "collectorNumber": "101", "roleFit": "An alternate imposing Unique if you want a different boss model.", "verified": true },
+    { "name": "General Marz", "set": "Resurrection", "rarity": "Unique", "collectorNumber": "104", "roleFit": "Another Unique commander usable as the boss.", "verified": true }
+  ]
+}

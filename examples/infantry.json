@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "little_soldier",
+  "name": "Infantry",
+  "confidence": "confirmed",
+  "color": "any",
+  "stats": {
+    "defense": 2,
+    "toughness": 5
+  },
+  "baseActions": [
+    "attack",
+    "move"
+  ],
+  "specialAction": {
+    "name": "Scout",
+    "summary": "Place up to 2 Scout tokens on your opponents' Little Soldiers. They do not need to be valid targets. These tokens reduce their defense.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 2,
+        "token": "scout",
+        "targets": "enemies",
+        "range": "any",
+        "needsValidTarget": false
+      }
+    ]
+  },
+  "superSoldiers": {
+    "specialAbility": {
+      "trigger": "per_lightning",
+      "summary": "For each Lightning rolled, make 1 Move after this Attack.",
+      "effects": [
+        {
+          "kind": "extra_move",
+          "count": 1,
+          "trigger": "per_lightning"
+        }
+      ]
+    },
+    "moveHeal": true
+  }
+}

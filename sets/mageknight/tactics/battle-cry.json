@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Battle Cry",
+  "confidence": "homebrew",
+  "flavor": "Magestone Spell — a rallying shout that sends the host surging forward.",
+  "cardType": "general",
+  "orderCondition": 1,
+  "summary": "Up to 3 allied Units each make 1 Move.",
+  "effects": [
+    {
+      "kind": "extra_move",
+      "count": 1,
+      "targets": "allies",
+      "text": "Up to 3 different allied Units each make 1 Move."
+    }
+  ]
+}

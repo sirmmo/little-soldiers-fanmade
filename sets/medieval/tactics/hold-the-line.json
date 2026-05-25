@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Hold the Line",
+  "confidence": "homebrew",
+  "flavor": "Realms at War Stratagem — a signature card of King Aldric (House Stag).",
+  "cardType": "general",
+  "orderCondition": 1,
+  "owner": "King Aldric of House Stag",
+  "summary": "Up to 3 allied Warriors can each make 1 Move.",
+  "effects": [
+    {
+      "kind": "extra_move",
+      "count": 1,
+      "targets": "allies",
+      "text": "Up to 3 different allied Warriors each make 1 Move."
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "general",
+  "name": "Billy the Kid",
+  "confidence": "homebrew",
+  "flavor": "High Noon — reprising the young, lightning-fast outlaw gunfighter. Reckless aggression and the fastest hands in the Territory. Leads the Outlaws.",
+  "color": "yellow",
+  "orderAction": {
+    "name": "The Word",
+    "summary": "Play 1 Grit token on one of your Hands currently in play.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "order",
+        "targets": "allies",
+        "range": "any",
+        "needsValidTarget": false
+      }
+    ]
+  },
+  "signatureTactics": [
+    "Lightning Hands",
+    "Quickdraw Duel",
+    "Fan the Hammer"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Fireball",
+  "confidence": "homebrew",
+  "flavor": "Magestone Spell — a bolt of raw flame that finds its mark across the field.",
+  "cardType": "general",
+  "orderCondition": 3,
+  "summary": "Make 1 Attack on any enemy Unit ignoring line of sight, with +1 reroll.",
+  "effects": [
+    {
+      "kind": "extra_attacks",
+      "count": 1,
+      "targets": "enemies",
+      "needsValidTarget": false,
+      "text": "1 Attack on any enemy, no valid target required."
+    },
+    {
+      "kind": "ignore_los",
+      "text": "The Fireball reaches anywhere on the Battlefield."
+    },
+    {
+      "kind": "modify_rerolls",
+      "count": 1,
+      "text": "That Attack gains +1 reroll."
+    }
+  ]
+}

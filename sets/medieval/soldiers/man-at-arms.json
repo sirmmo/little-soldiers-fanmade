@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "little_soldier",
+  "name": "Man-at-Arms",
+  "confidence": "homebrew",
+  "flavor": "Realms at War — the backbone of any host. Medieval counterpart of the Infantry (same chassis).",
+  "color": "any",
+  "stats": {
+    "defense": 2,
+    "toughness": 5
+  },
+  "baseActions": [
+    "attack",
+    "move"
+  ],
+  "specialAction": {
+    "name": "Scout the Field",
+    "summary": "Place up to 2 Exposed tokens on enemy Warriors. They do not need to be valid targets. Each Exposed token lowers that Warrior's Armour.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 2,
+        "token": "scout",
+        "targets": "enemies",
+        "range": "any",
+        "needsValidTarget": false
+      }
+    ]
+  },
+  "superSoldiers": {
+    "specialAbility": {
+      "trigger": "per_lightning",
+      "summary": "For each Lightning, make 1 Move after this Attack.",
+      "effects": [
+        {
+          "kind": "extra_move",
+          "count": 1,
+          "trigger": "per_lightning"
+        }
+      ]
+    },
+    "moveHeal": true
+  }
+}

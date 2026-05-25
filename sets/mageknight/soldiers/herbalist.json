@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "little_soldier",
+  "name": "Herbalist",
+  "confidence": "homebrew",
+  "flavor": "Magestone (Mage Knight) — tends the wounded between clashes (Herbalists heal Wounds in Mage Knight). New archetype: fragile support. figureCandidates from Mage Knight: Resurrection (minisgallery.com) — use a figure with the Healer ability; Resurrection has no obvious dedicated healer, so these are thematic support stand-ins (editorial).",
+  "color": "any",
+  "stats": { "defense": 2, "toughness": 4 },
+  "baseActions": ["attack", "move"],
+  "specialAction": {
+    "name": "Healing Herbs",
+    "summary": "Remove up to 2 Wounds total, split between this Unit and one allied Unit within yellow range. No valid target needed.",
+    "effects": [
+      { "kind": "self_heal", "count": 1, "token": "heart", "targets": "self" },
+      { "kind": "self_heal", "count": 1, "token": "heart", "targets": "allies", "range": "yellow", "needsValidTarget": false, "text": "Remove up to 1 Wound from an ally in yellow range." }
+    ]
+  },
+  "superSoldiers": {
+    "specialAbility": {
+      "trigger": "per_lightning",
+      "summary": "For each Lightning, remove 1 extra Wound from an allied Unit within yellow range.",
+      "effects": [ { "kind": "self_heal", "count": 1, "token": "heart", "targets": "allies", "range": "yellow", "trigger": "per_lightning" } ]
+    },
+    "moveHeal": true
+  },
+  "figureCandidates": [
+    { "name": "Bonebreaker Shaman", "set": "Resurrection", "rarity": "Common", "collectorNumber": "11", "roleFit": "A shaman/support caster — closest common stand-in for a healer.", "verified": true },
+    { "name": "Solonavi Domineer", "set": "Resurrection", "rarity": "Uncommon", "collectorNumber": "19", "roleFit": "A support caster, if it carries a restorative power.", "verified": true }
+  ]
+}

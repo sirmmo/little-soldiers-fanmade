@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Mana Surge",
+  "confidence": "homebrew",
+  "flavor": "Magestone Spell — channel a surge of mana into fresh orders. Mirrors the base game's General's Orders.",
+  "cardType": "general",
+  "orderCondition": 2,
+  "summary": "Gain Bonus Command tokens. They work like Command tokens but return to the Reserve at the end of the Round.",
+  "effects": [
+    {
+      "kind": "grant_order",
+      "count": 3,
+      "token": "bonus_order",
+      "targets": "allies",
+      "text": "Take the 3 Bonus Command tokens from the Reserve."
+    }
+  ]
+}

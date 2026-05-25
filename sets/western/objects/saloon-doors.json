@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "object",
+  "name": "Saloon Doors",
+  "confidence": "homebrew",
+  "flavor": "High Noon — the batwing doors of the saloon. Reskin of the Switch. Activate at the end of a Move to swing them open or shut.",
+  "twoSided": true,
+  "summary": "Flip the Saloon Doors token. While shut (dark side showing), sightlines through the doorway are blocked: for each shut Saloon Doors in the Territory, ALL players have 1 fewer reroll when Attacking.",
+  "effects": [
+    {
+      "kind": "modify_rerolls",
+      "count": -1,
+      "targets": "all",
+      "text": "While shut, every Attack in the Territory has -1 reroll."
+    }
+  ]
+}

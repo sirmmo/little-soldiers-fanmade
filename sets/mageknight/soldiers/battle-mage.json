@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "little_soldier",
+  "name": "Battle Mage",
+  "confidence": "homebrew",
+  "flavor": "Magestone (Mage Knight) — hurls raw mana into the enemy ranks. Reskin of the Grenadier; the Fireball die behaves like the Grenade die. figureCandidates from Mage Knight: Resurrection (minisgallery.com) — casters; role assignment editorial.",
+  "color": "any",
+  "stats": { "defense": 2, "toughness": 6 },
+  "baseActions": ["attack", "move"],
+  "specialAction": {
+    "name": "Fireball",
+    "summary": "Place a green Move token by the figurine, set the Fireball die on it, and flick it toward your foes (it must roll). All Units, friend or foe, within yellow range of the die suffer an attack of the rolled value (3, 5 or 7). On a backfire it explodes on the caster: only the Battle Mage is hit for 7. No valid target needed.",
+    "effects": [
+      { "kind": "dice_launch", "die": "custom", "range": "yellow", "targets": "all", "needsValidTarget": false, "text": "Flick the Fireball die (Grenade-die analog)." },
+      { "kind": "ignore_los", "text": "A Fireball does not require a valid target." },
+      { "kind": "self_risk", "die": "custom", "text": "A backfire hits only the Battle Mage for 7." }
+    ]
+  },
+  "superSoldiers": {
+    "specialAbility": {
+      "trigger": "per_lightning",
+      "summary": "For each Lightning, choose an additional valid target and apply this Attack's hits to it as well.",
+      "effects": [ { "kind": "multi_target", "count": 1, "targets": "enemies", "trigger": "per_lightning", "needsValidTarget": true } ]
+    },
+    "moveHeal": true
+  },
+  "figureCandidates": [
+    { "name": "Bonebreaker Shaman", "set": "Resurrection", "rarity": "Common", "collectorNumber": "11", "roleFit": "The set's common spellcaster — best Battle Mage stand-in.", "verified": true },
+    { "name": "Solonavi Domineer", "set": "Resurrection", "rarity": "Uncommon", "collectorNumber": "19", "roleFit": "A Solonavi caster (the faction of powerful mages).", "verified": true },
+    { "name": "Technoshocker", "set": "Resurrection", "rarity": "Uncommon", "collectorNumber": "18", "roleFit": "Area shock/blast attacker.", "verified": true },
+    { "name": "Exarch Balion", "set": "Resurrection", "rarity": "Rare", "collectorNumber": "23", "roleFit": "An exarch/caster-leader, for a marquee mage.", "verified": true }
+  ]
+}

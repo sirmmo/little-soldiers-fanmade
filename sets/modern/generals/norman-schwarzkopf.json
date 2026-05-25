@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "general",
+  "name": "Norman Schwarzkopf",
+  "confidence": "homebrew",
+  "flavor": "Combined Arms (Modern) — reprising 'Stormin' Norman' of the Gulf War. Combined-arms overwhelming force and the famous 'left hook' flanking envelopment. Rewards air power and decisive maneuver.",
+  "color": "any",
+  "orderAction": {
+    "name": "Command",
+    "summary": "Play 1 Command token on one of your units currently in play.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "order",
+        "targets": "allies",
+        "range": "any",
+        "needsValidTarget": false
+      }
+    ]
+  },
+  "signatureTactics": [
+    "The Left Hook",
+    "Air Strike",
+    "Overwhelming Force"
+  ]
+}

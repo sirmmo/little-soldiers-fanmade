@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "general",
+  "name": "Tovak",
+  "confidence": "homebrew",
+  "flavor": "Magestone (Mage Knight) — reprising the cold, calculating blue Mage Knight. Master of ice and efficiency: pick the moment, strike with precision, waste nothing.",
+  "color": "any",
+  "orderAction": {
+    "name": "Command",
+    "summary": "Play 1 Command token on one of your Units currently in play.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "order",
+        "targets": "allies",
+        "range": "any",
+        "needsValidTarget": false
+      }
+    ]
+  },
+  "signatureTactics": [
+    "Ice Bolt",
+    "Concentration",
+    "Mana Surge"
+  ],
+  "figureCandidates": [
+    { "name": "Tovak", "set": "Resurrection", "rarity": "Uncommon", "collectorNumber": "15", "roleFit": "The Tovak hero figure itself.", "verified": true }
+  ]
+}

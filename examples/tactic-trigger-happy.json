@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Trigger Happy",
+  "confidence": "confirmed",
+  "flavor": "A Soldier Tactics card from the Advanced Tactics module; one of General Dinosaur's signature cards.",
+  "cardType": "soldier",
+  "orderCondition": 2,
+  "owner": "Dinosaur",
+  "summary": "Make up to 3 Attacks on different targets.",
+  "effects": [
+    {
+      "kind": "extra_attacks",
+      "count": 3,
+      "targets": "enemies",
+      "text": "Up to 3 Attacks, each on a different valid target."
+    }
+  ]
+}

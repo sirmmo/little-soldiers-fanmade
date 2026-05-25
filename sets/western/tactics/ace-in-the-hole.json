@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Ace in the Hole",
+  "confidence": "homebrew",
+  "flavor": "High Noon Gambit — that extra card you kept under the table. Mirrors the base game's General's Orders.",
+  "cardType": "general",
+  "orderCondition": 2,
+  "summary": "Gain Bonus Grit tokens. They work like Grit tokens but return to the Reserve at the end of the Round.",
+  "effects": [
+    {
+      "kind": "grant_order",
+      "count": 3,
+      "token": "bonus_order",
+      "targets": "allies",
+      "text": "Take the 3 Bonus Grit tokens from the Reserve."
+    }
+  ]
+}

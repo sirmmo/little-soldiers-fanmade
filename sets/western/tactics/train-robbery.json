@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Train Robbery",
+  "confidence": "homebrew",
+  "flavor": "High Noon Gambit — Jesse James's signature. Hit the express car and ride off with the strongbox.",
+  "cardType": "general",
+  "orderCondition": 1,
+  "owner": "Jesse James",
+  "summary": "Draw 2 Gambits from the deck (raid the strongbox).",
+  "effects": [
+    {
+      "kind": "draw_cards",
+      "count": 2,
+      "text": "Draw 2 Gambit cards."
+    }
+  ]
+}

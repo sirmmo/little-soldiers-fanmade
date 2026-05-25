@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "general",
+  "name": "Bass Reeves",
+  "confidence": "homebrew",
+  "flavor": "High Noon — reprising the legendary US Deputy Marshal who brought in thousands and never gave up a chase. Relentless: runs the quarry down. Leads the Lawmen.",
+  "color": "green",
+  "orderAction": {
+    "name": "The Word",
+    "summary": "Play 1 Grit token on one of your Hands currently in play.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "order",
+        "targets": "allies",
+        "range": "any",
+        "needsValidTarget": false
+      }
+    ]
+  },
+  "signatureTactics": [
+    "Always Get Your Man",
+    "Fan the Hammer",
+    "Ride Hard"
+  ]
+}

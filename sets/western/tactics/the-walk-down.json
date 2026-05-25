@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "The Walk-Down",
+  "confidence": "homebrew",
+  "flavor": "High Noon Gambit — Wyatt Earp's signature. Walk straight up the street, slow and certain, and put him down.",
+  "cardType": "soldier",
+  "orderCondition": 2,
+  "owner": "Wyatt Earp",
+  "summary": "The chosen Hand makes a straight-line Move toward a foe, then makes 1 Attack with +1 reroll.",
+  "effects": [
+    {
+      "kind": "straight_line_move",
+      "targets": "self",
+      "text": "Walk down the street: a full straight-line Move."
+    },
+    {
+      "kind": "extra_attacks",
+      "count": 1,
+      "targets": "enemies",
+      "needsValidTarget": true,
+      "text": "Then make 1 Attack."
+    },
+    {
+      "kind": "modify_rerolls",
+      "count": 1,
+      "text": "That Attack gains +1 reroll."
+    }
+  ]
+}

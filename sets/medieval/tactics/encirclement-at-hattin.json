@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Encirclement at Hattin",
+  "confidence": "homebrew",
+  "flavor": "Realms at War Stratagem — a signature card of Saladin. Surround and harry from every side, as at the Horns of Hattin, 1187, until the enemy's armour fails them.",
+  "cardType": "general",
+  "orderCondition": 2,
+  "owner": "Saladin",
+  "summary": "Place 1 Exposed token on each of up to 3 different enemy Warriors anywhere on the Field (lowering their Armour).",
+  "effects": [
+    {
+      "kind": "place_tokens",
+      "count": 3,
+      "token": "scout",
+      "targets": "enemies",
+      "range": "any",
+      "needsValidTarget": false,
+      "text": "Up to 3 different enemy Warriors each gain 1 Exposed token."
+    }
+  ]
+}

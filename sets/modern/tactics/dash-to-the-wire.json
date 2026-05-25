@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Dash to the Wire",
+  "confidence": "homebrew",
+  "flavor": "Combined Arms Doctrine — Rommel's signature deep armoured thrust: punch through and keep going before the enemy can close the gap.",
+  "cardType": "soldier",
+  "orderCondition": 2,
+  "owner": "Erwin Rommel",
+  "summary": "The chosen unit makes a straight-line Move as far as the cord allows, then makes 1 Attack with +1 reroll.",
+  "effects": [
+    {
+      "kind": "straight_line_move",
+      "targets": "self",
+      "text": "Breakthrough: a full straight-line Move."
+    },
+    {
+      "kind": "extra_attacks",
+      "count": 1,
+      "targets": "enemies",
+      "needsValidTarget": true,
+      "text": "Then make 1 Attack."
+    },
+    {
+      "kind": "modify_rerolls",
+      "count": 1,
+      "text": "That Attack gains +1 reroll."
+    }
+  ]
+}

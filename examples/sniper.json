@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "little_soldier",
+  "name": "Sniper",
+  "confidence": "confirmed",
+  "color": "any",
+  "stats": {
+    "defense": 3,
+    "toughness": 3
+  },
+  "baseActions": [
+    "attack",
+    "move"
+  ],
+  "specialAction": {
+    "name": "Risky Shot",
+    "summary": "Make an Attack on a valid target and add the Sniper die to the 5 Attack dice. The Sniper die adds results but not all are good: its Boom faces add Hearts to your own card (+2 or +1). It re-rolls like other dice but can never be modified by other effects.",
+    "effects": [
+      {
+        "kind": "augment_attack",
+        "die": "sniper",
+        "count": 1,
+        "targets": "enemies",
+        "needsValidTarget": true
+      },
+      {
+        "kind": "self_risk",
+        "die": "sniper",
+        "token": "heart",
+        "text": "Boom faces add +2 or +1 Heart to the Sniper."
+      }
+    ]
+  },
+  "superSoldiers": {
+    "specialAbility": {
+      "trigger": "per_lightning",
+      "summary": "For each Lightning, place 1 Shield token from the Reserve onto your target's card after your Attack (lowering its defense).",
+      "effects": [
+        {
+          "kind": "place_tokens",
+          "count": 1,
+          "token": "shield",
+          "targets": "enemies",
+          "trigger": "per_lightning",
+          "needsValidTarget": true
+        }
+      ]
+    },
+    "moveHeal": true
+  }
+}

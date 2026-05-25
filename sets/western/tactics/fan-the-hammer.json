@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Fan the Hammer",
+  "confidence": "homebrew",
+  "flavor": "High Noon Gambit — slap the hammer back fast as you can and empty the cylinder.",
+  "cardType": "soldier",
+  "orderCondition": 2,
+  "summary": "Make up to 3 Attacks on different targets.",
+  "effects": [
+    {
+      "kind": "extra_attacks",
+      "count": 3,
+      "targets": "enemies",
+      "text": "Up to 3 Attacks, each on a different valid target."
+    }
+  ]
+}

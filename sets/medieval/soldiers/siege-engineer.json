@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "little_soldier",
+  "name": "Siege Engineer",
+  "confidence": "homebrew",
+  "flavor": "Realms at War — crews the Trebuchet. Medieval counterpart of the Operator; the Trebuchet is the catapult and the Boulder is the Mortar token.",
+  "color": "any",
+  "stats": {
+    "defense": 2,
+    "toughness": 5
+  },
+  "baseActions": [
+    "attack",
+    "move"
+  ],
+  "specialAction": {
+    "name": "Trebuchet",
+    "summary": "Bring up the Trebuchet at the Field edge nearest the engineer, aimed any way. Load the Boulder and loose it onto the Field. Every Warrior within range — friend and foe — takes Wounds equal to the side the Boulder landed on. No valid target needed.",
+    "effects": [
+      {
+        "kind": "catapult_launch",
+        "die": "mortar",
+        "range": "any",
+        "targets": "all",
+        "needsValidTarget": false,
+        "text": "Launch the Boulder with the Trebuchet (catapult)."
+      },
+      {
+        "kind": "area_effect",
+        "token": "heart",
+        "targets": "all",
+        "range": "any",
+        "needsValidTarget": false
+      },
+      {
+        "kind": "ignore_los",
+        "text": "The Trebuchet does not require a valid target."
+      }
+    ]
+  },
+  "superSoldiers": {
+    "specialAbility": {
+      "trigger": "per_lightning",
+      "summary": "For each Lightning, move 1 Wound from one Warrior's card onto any other Warrior in play (including an enemy) — redirect the falling rubble.",
+      "effects": [
+        {
+          "kind": "transfer_token",
+          "count": 1,
+          "token": "heart",
+          "targets": "all",
+          "trigger": "per_lightning"
+        }
+      ]
+    },
+    "moveHeal": true
+  }
+}

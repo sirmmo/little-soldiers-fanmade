@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Forced March",
+  "confidence": "homebrew",
+  "flavor": "Realms at War Stratagem — a signature card of Queen Mara (House Wolf).",
+  "cardType": "soldier",
+  "orderCondition": 2,
+  "owner": "Queen Mara of House Wolf",
+  "summary": "The chosen Warrior makes 3 Moves.",
+  "effects": [
+    {
+      "kind": "extra_move",
+      "count": 3,
+      "targets": "self",
+      "text": "The chosen Warrior makes 3 Moves."
+    }
+  ]
+}

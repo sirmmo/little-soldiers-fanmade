@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Ambush",
+  "confidence": "homebrew",
+  "flavor": "Realms at War Stratagem — a signature Reaction card of Queen Mara (House Wolf).",
+  "cardType": "reaction",
+  "owner": "Queen Mara of House Wolf",
+  "reactionTrigger": "When you are about to apply the results of one of your Attacks.",
+  "summary": "Gain 1 additional reroll on that Attack.",
+  "effects": [
+    {
+      "kind": "modify_rerolls",
+      "count": 1,
+      "targets": "self",
+      "trigger": "reaction:before_resolve_attack",
+      "text": "Your Attack gains +1 reroll."
+    }
+  ]
+}

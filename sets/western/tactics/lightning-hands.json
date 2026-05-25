@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Lightning Hands",
+  "confidence": "homebrew",
+  "flavor": "High Noon Gambit — Billy the Kid's signature. The fastest hands in the Territory: two shots before you blink.",
+  "cardType": "soldier",
+  "orderCondition": 2,
+  "owner": "Billy the Kid",
+  "summary": "The chosen Hand makes 2 Attacks.",
+  "effects": [
+    {
+      "kind": "extra_attacks",
+      "count": 2,
+      "targets": "enemies",
+      "needsValidTarget": true,
+      "text": "Make 2 Attacks."
+    }
+  ]
+}

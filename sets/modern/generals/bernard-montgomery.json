@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "general",
+  "name": "Bernard Montgomery",
+  "confidence": "homebrew",
+  "flavor": "Combined Arms (WW2) — reprising the victor of El Alamein. Methodical and unhurried: build up overwhelming firepower, prepare meticulously, then strike with a set-piece battle. Rewards preparation and concentrated fire.",
+  "color": "any",
+  "orderAction": {
+    "name": "Command",
+    "summary": "Play 1 Command token on one of your units currently in play.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "order",
+        "targets": "allies",
+        "range": "any",
+        "needsValidTarget": false
+      }
+    ]
+  },
+  "signatureTactics": [
+    "El Alamein Set-Piece",
+    "Air Strike",
+    "Forward Observers"
+  ]
+}

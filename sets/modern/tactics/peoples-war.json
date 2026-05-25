@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "People's War",
+  "confidence": "homebrew",
+  "flavor": "Combined Arms Doctrine — Giáp's asymmetric attrition: harass the enemy from every side while your own forces melt away and endure.",
+  "cardType": "general",
+  "orderCondition": 1,
+  "owner": "Võ Nguyên Giáp",
+  "summary": "Place 1 Suppression token on each of up to 3 enemy units anywhere, then remove 1 Casualty from one allied unit.",
+  "effects": [
+    {
+      "kind": "place_tokens",
+      "count": 3,
+      "token": "scout",
+      "targets": "enemies",
+      "range": "any",
+      "needsValidTarget": false,
+      "text": "Harass: up to 3 enemy units each gain 1 Suppression token."
+    },
+    {
+      "kind": "self_heal",
+      "count": 1,
+      "token": "heart",
+      "targets": "allies",
+      "range": "any",
+      "text": "Endure: remove 1 Casualty from one allied unit."
+    }
+  ]
+}

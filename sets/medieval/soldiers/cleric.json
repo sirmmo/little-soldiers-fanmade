@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "little_soldier",
+  "name": "Cleric",
+  "confidence": "homebrew",
+  "flavor": "Realms at War — new archetype. A battlefield chaplain: no offense of its own, fragile, but a powerful well of recovery (see FRAMEWORK.md heuristic 5). Mirrors the Medic worked example.",
+  "color": "any",
+  "stats": {
+    "defense": 2,
+    "toughness": 4
+  },
+  "baseActions": [
+    "attack",
+    "move"
+  ],
+  "specialAction": {
+    "name": "Lay On Hands",
+    "summary": "Remove up to 2 Wounds total, split between this Warrior and one allied Warrior within yellow range. No valid target needed.",
+    "effects": [
+      {
+        "kind": "self_heal",
+        "count": 1,
+        "token": "heart",
+        "targets": "self"
+      },
+      {
+        "kind": "self_heal",
+        "count": 1,
+        "token": "heart",
+        "targets": "allies",
+        "range": "yellow",
+        "needsValidTarget": false,
+        "text": "Remove up to 1 Wound from an ally in yellow range."
+      }
+    ]
+  },
+  "superSoldiers": {
+    "specialAbility": {
+      "trigger": "per_lightning",
+      "summary": "For each Lightning, remove 1 extra Wound from an allied Warrior within yellow range.",
+      "effects": [
+        {
+          "kind": "self_heal",
+          "count": 1,
+          "token": "heart",
+          "targets": "allies",
+          "range": "yellow",
+          "trigger": "per_lightning"
+        }
+      ]
+    },
+    "moveHeal": true
+  }
+}

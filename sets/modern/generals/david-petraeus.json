@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "general",
+  "name": "David Petraeus",
+  "confidence": "homebrew",
+  "flavor": "Combined Arms (Modern) — reprising the architect of modern counterinsurgency (COIN) and the Surge. 'Clear, hold, build': secure ground, sustain the force, and out-last the enemy rather than out-gun them. Rewards territorial control and endurance.",
+  "color": "any",
+  "orderAction": {
+    "name": "Command",
+    "summary": "Play 1 Command token on one of your units currently in play.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "order",
+        "targets": "allies",
+        "range": "any",
+        "needsValidTarget": false
+      }
+    ]
+  },
+  "signatureTactics": [
+    "Clear and Hold",
+    "CASEVAC",
+    "Combined Arms"
+  ]
+}

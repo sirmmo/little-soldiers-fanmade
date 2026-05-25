@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "general",
+  "name": "Jesse James",
+  "confidence": "homebrew",
+  "flavor": "High Noon — reprising the notorious outlaw gang leader and train robber. Hits fast, grabs the loot, and is gone before the posse saddles up. Leads the Outlaws.",
+  "color": "yellow",
+  "orderAction": {
+    "name": "The Word",
+    "summary": "Play 1 Grit token on one of your Hands currently in play.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "order",
+        "targets": "allies",
+        "range": "any",
+        "needsValidTarget": false
+      }
+    ]
+  },
+  "signatureTactics": [
+    "Train Robbery",
+    "Ride Hard",
+    "Ace in the Hole"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "threat",
+  "name": "Pinky",
+  "confidence": "inferred",
+  "flavor": "Co-op Threat from Book 3 ('A New Threat'). Attack text is confirmed (Book 3 p9). Defense/Toughness here are a best read of the box-side profile and should be verified against the physical box.",
+  "stats": {
+    "defense": 5,
+    "toughness": 6
+  },
+  "target": "The Target symbol on the box-side illustration; used for line-of-sight and range to Pinky.",
+  "attack": {
+    "name": "Attack",
+    "summary": "Place 1 Shield token on all valid targets. Place 1 Heart on all Little Soldiers (whether they are valid targets or not).",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "shield",
+        "targets": "enemies",
+        "needsValidTarget": true
+      },
+      {
+        "kind": "area_effect",
+        "count": 1,
+        "token": "heart",
+        "targets": "enemies",
+        "range": "any",
+        "needsValidTarget": false
+      }
+    ]
+  },
+  "superSpecialAbility": {
+    "trigger": "three_plus_lightning",
+    "summary": "On 3+ Lightning in the collective Threat attack, activate Pinky's Super Special Ability. The exact text is printed on the physical box side (Threat profiles are not in any rulebook) — verify from the box."
+  },
+  "forceField": {
+    "switchNumbers": [
+      1
+    ],
+    "requiresAllSwitches": false
+  }
+}

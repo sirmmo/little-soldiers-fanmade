@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "general",
+  "name": "Dinosaur",
+  "confidence": "confirmed",
+  "flavor": "The Green squad's General — the oldest toy in the playroom. Old-school but effective, never runs from a fight. With the Advanced Tactics module he starts with the 3 signature cards below.",
+  "color": "green",
+  "orderAction": {
+    "name": "Giving an Order",
+    "summary": "Play 1 Order token on one of your Little Soldiers currently in play.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "order",
+        "targets": "allies",
+        "range": "any",
+        "needsValidTarget": false
+      }
+    ]
+  },
+  "signatureTactics": [
+    "Trigger Happy",
+    "Strategic Retreat",
+    "Camouflage"
+  ]
+}

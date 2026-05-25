@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Combined Arms",
+  "confidence": "homebrew",
+  "flavor": "Combined Arms Doctrine — infantry, armour and support moving as one.",
+  "cardType": "general",
+  "orderCondition": 1,
+  "summary": "Up to 3 allied units can each make 1 Move.",
+  "effects": [
+    {
+      "kind": "extra_move",
+      "count": 1,
+      "targets": "allies",
+      "text": "Up to 3 different allied units each make 1 Move."
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "little_soldier",
+  "name": "Longbowman",
+  "confidence": "homebrew",
+  "flavor": "Realms at War — death from afar. Medieval counterpart of the Sniper; the Longbow die behaves like the Sniper die.",
+  "color": "any",
+  "stats": {
+    "defense": 3,
+    "toughness": 3
+  },
+  "baseActions": [
+    "attack",
+    "move"
+  ],
+  "specialAction": {
+    "name": "Longbow Volley",
+    "summary": "Make an Attack on a valid target and add the Longbow die to the Attack dice. Its good faces add hits; on a snapped-string face you take a Wound (+2 or +1) yourself. The Longbow die re-rolls like the others but can never be modified.",
+    "effects": [
+      {
+        "kind": "augment_attack",
+        "die": "custom",
+        "count": 1,
+        "targets": "enemies",
+        "needsValidTarget": true,
+        "text": "Add the Longbow die (Sniper-die analog) to the Attack pool."
+      },
+      {
+        "kind": "self_risk",
+        "die": "custom",
+        "token": "heart",
+        "text": "Snapped-string faces add +2 or +1 Wound to the Longbowman."
+      }
+    ]
+  },
+  "superSoldiers": {
+    "specialAbility": {
+      "trigger": "per_lightning",
+      "summary": "For each Lightning, place 1 Exposed token on the target after your Attack (lowering its Armour).",
+      "effects": [
+        {
+          "kind": "place_tokens",
+          "count": 1,
+          "token": "scout",
+          "targets": "enemies",
+          "trigger": "per_lightning",
+          "needsValidTarget": true
+        }
+      ]
+    },
+    "moveHeal": true
+  }
+}

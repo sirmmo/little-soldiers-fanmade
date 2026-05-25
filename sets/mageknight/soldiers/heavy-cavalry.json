@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "little_soldier",
+  "name": "Heavy Cavalry",
+  "confidence": "homebrew",
+  "flavor": "Magestone (Mage Knight) — breaks a line on the charge. New archetype: well-armoured but over-committed (lower Life). figureCandidates from Mage Knight: Resurrection (minisgallery.com) — mounts, beasts and heavy melee; role assignment editorial.",
+  "color": "any",
+  "stats": { "defense": 3, "toughness": 4 },
+  "baseActions": ["attack", "move"],
+  "specialAction": {
+    "name": "Cavalry Charge",
+    "summary": "Make a straight-line Move as far as the cord allows, then immediately make 1 Attack with +1 reroll. The charge is your whole action for the turn.",
+    "effects": [
+      { "kind": "straight_line_move", "targets": "self", "text": "Charge: a full straight-line Move." },
+      { "kind": "extra_attacks", "count": 1, "targets": "enemies", "needsValidTarget": true, "text": "Then make 1 Attack." },
+      { "kind": "modify_rerolls", "count": 1, "text": "That charging Attack gains +1 reroll." }
+    ]
+  },
+  "superSoldiers": {
+    "specialAbility": {
+      "trigger": "per_lightning",
+      "summary": "For each Lightning, make 1 Move after this Attack (ride them down).",
+      "effects": [ { "kind": "extra_move", "count": 1, "trigger": "per_lightning" } ]
+    },
+    "moveHeal": true
+  },
+  "figureCandidates": [
+    { "name": "Moonborn Dunewolf", "set": "Resurrection", "rarity": "Common", "collectorNumber": "1", "roleFit": "Fast beast — a natural charger.", "verified": true },
+    { "name": "Wolfkin Raider", "set": "Resurrection", "rarity": "Common", "collectorNumber": "9", "roleFit": "Swift melee striker.", "verified": true },
+    { "name": "Dwarven Axeshield", "set": "Resurrection", "rarity": "Common", "collectorNumber": "2", "roleFit": "Heavy, well-armoured melee if you want a tankier charger.", "verified": true },
+    { "name": "Orc Harrower", "set": "Resurrection", "rarity": "Uncommon", "collectorNumber": "17", "roleFit": "Aggressive heavy bruiser.", "verified": true },
+    { "name": "Cavalier Freeblade", "set": "Resurrection", "rarity": "Unique", "collectorNumber": "102", "roleFit": "A mounted cavalier — the truest Heavy Cavalry fit.", "verified": true },
+    { "name": "Growlfang", "set": "Resurrection", "rarity": "Unique", "collectorNumber": "103", "roleFit": "A great beast charger for a centrepiece.", "verified": true },
+    { "name": "Harrowblade", "set": "Resurrection", "rarity": "Unique", "collectorNumber": "105", "roleFit": "Elite melee shock unit.", "verified": true }
+  ]
+}

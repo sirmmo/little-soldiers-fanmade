@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "little_soldier",
+  "name": "Siege Ballista",
+  "confidence": "homebrew",
+  "flavor": "Magestone (Mage Knight) — a war engine that flattens whatever it lands on. Reskin of the Operator; the siege engine is the catapult and the Boulder is the Mortar token. Note: Mage Knight: Resurrection has no dedicated war-machine sculpt, so use a heavy ranged attacker as a stand-in or proxy a catapult. Source: minisgallery.com.",
+  "color": "any",
+  "stats": { "defense": 2, "toughness": 5 },
+  "baseActions": ["attack", "move"],
+  "specialAction": {
+    "name": "Bombardment",
+    "summary": "Bring the siege engine to the Battlefield edge nearest the crew, aimed any way. Load the Boulder and loose it. Every Unit within range — friend and foe — takes Wounds equal to the side the Boulder landed on. No valid target needed.",
+    "effects": [
+      { "kind": "catapult_launch", "die": "mortar", "range": "any", "targets": "all", "needsValidTarget": false, "text": "Fire the siege engine (catapult)." },
+      { "kind": "area_effect", "token": "heart", "targets": "all", "range": "any", "needsValidTarget": false },
+      { "kind": "ignore_los", "text": "The siege engine does not require a valid target." }
+    ]
+  },
+  "superSoldiers": {
+    "specialAbility": {
+      "trigger": "per_lightning",
+      "summary": "For each Lightning, move 1 Wound from one Unit's card onto any other Unit in play (including an enemy).",
+      "effects": [ { "kind": "transfer_token", "count": 1, "token": "heart", "targets": "all", "trigger": "per_lightning" } ]
+    },
+    "moveHeal": true
+  },
+  "figureCandidates": [
+    { "name": "Technoshocker", "set": "Resurrection", "rarity": "Uncommon", "collectorNumber": "18", "roleFit": "Heavy ranged attacker — closest stand-in for an artillery piece in this set.", "verified": true },
+    { "name": "Skyguard Captain", "set": "Resurrection", "rarity": "Uncommon", "collectorNumber": "16", "roleFit": "Long-reach bombardment from the air.", "verified": true }
+  ]
+}

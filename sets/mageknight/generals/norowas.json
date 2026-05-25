@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "general",
+  "name": "Norowas",
+  "confidence": "homebrew",
+  "flavor": "Magestone (Mage Knight) — reprising the noble white Mage Knight. An inspiring leader who fights through his allies, marshalling the host with light and loyalty.",
+  "color": "any",
+  "orderAction": {
+    "name": "Command",
+    "summary": "Play 1 Command token on one of your Units currently in play.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "order",
+        "targets": "allies",
+        "range": "any",
+        "needsValidTarget": false
+      }
+    ]
+  },
+  "signatureTactics": [
+    "Bonds of Loyalty",
+    "Battle Cry",
+    "Concentration"
+  ],
+  "figureCandidates": [
+    { "name": "Norowas", "set": "Resurrection", "rarity": "Uncommon", "collectorNumber": "12", "roleFit": "The Norowas hero figure itself.", "verified": true },
+    { "name": "Wolfhawk", "set": "Resurrection", "rarity": "Rare", "collectorNumber": "20", "roleFit": "An alternate Mage Knight hero, if you prefer a mobile commander.", "verified": true }
+  ]
+}

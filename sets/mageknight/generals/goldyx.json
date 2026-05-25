@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "general",
+  "name": "Goldyx",
+  "confidence": "homebrew",
+  "flavor": "Magestone (Mage Knight) — reprising the dragon-blooded green Mage Knight. Versatile and resourceful, drawing on the land's mana to adapt, restore and endure.",
+  "color": "any",
+  "orderAction": {
+    "name": "Command",
+    "summary": "Play 1 Command token on one of your Units currently in play.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "order",
+        "targets": "allies",
+        "range": "any",
+        "needsValidTarget": false
+      }
+    ]
+  },
+  "signatureTactics": [
+    "Crystal Mastery",
+    "Swiftness",
+    "Battle Cry"
+  ],
+  "figureCandidates": [
+    { "name": "Goldyx", "set": "Resurrection", "rarity": "Uncommon", "collectorNumber": "14", "roleFit": "The Goldyx hero figure itself.", "verified": true }
+  ]
+}

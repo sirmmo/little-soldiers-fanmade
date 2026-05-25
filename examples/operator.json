@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "little_soldier",
+  "name": "Operator",
+  "confidence": "card-scan",
+  "flavor": "Toughness 5 and the Super Soldiers ability are confirmed (Books 1 & 2). The Defense value is NOT legible in the rulebooks (the card appears only as a thumbnail) — the 2 below is a placeholder; read the real value off the physical card.",
+  "color": "any",
+  "stats": {
+    "defense": 2,
+    "toughness": 5
+  },
+  "baseActions": [
+    "attack",
+    "move"
+  ],
+  "specialAction": {
+    "name": "Mortar Shot",
+    "summary": "Take the catapult from the Reserve and place it on the Play Zone edge nearest the Operator, aimed any direction. Place the Mortar token on it and launch onto the battlefield. All figurines within range — allies and enemies — take Hearts equal to the side the Mortar token landed on. No valid target needed.",
+    "effects": [
+      {
+        "kind": "catapult_launch",
+        "die": "mortar",
+        "range": "any",
+        "targets": "all",
+        "needsValidTarget": false
+      },
+      {
+        "kind": "area_effect",
+        "token": "heart",
+        "targets": "all",
+        "range": "any",
+        "needsValidTarget": false
+      },
+      {
+        "kind": "ignore_los",
+        "text": "Mortars do not require a valid target."
+      }
+    ]
+  },
+  "superSoldiers": {
+    "specialAbility": {
+      "trigger": "per_lightning",
+      "summary": "For each Lightning, move 1 Heart token from one of your Little Soldiers' cards onto any other Little Soldier in play (including an opponent's).",
+      "effects": [
+        {
+          "kind": "transfer_token",
+          "count": 1,
+          "token": "heart",
+          "targets": "all",
+          "trigger": "per_lightning"
+        }
+      ]
+    },
+    "moveHeal": true
+  }
+}

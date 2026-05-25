@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Audacity",
+  "confidence": "homebrew",
+  "flavor": "Combined Arms Doctrine — Patton's creed: hit hard, then keep driving forward. 'A good plan violently executed now is better than a perfect plan next week.'",
+  "cardType": "soldier",
+  "orderCondition": 3,
+  "owner": "George S. Patton",
+  "summary": "The chosen unit makes 2 Attacks, then 1 Move.",
+  "effects": [
+    {
+      "kind": "extra_attacks",
+      "count": 2,
+      "targets": "enemies",
+      "needsValidTarget": true,
+      "text": "Make 2 Attacks."
+    },
+    {
+      "kind": "extra_move",
+      "count": 1,
+      "targets": "self",
+      "text": "Then make 1 Move (keep driving forward)."
+    }
+  ]
+}

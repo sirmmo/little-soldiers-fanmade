@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "little_soldier",
+  "name": "Cannoneer",
+  "confidence": "homebrew",
+  "flavor": "High Noon — wheels out a surplus Army cannon. Reskin of the Operator; the Cannon is the catapult and the Blast is the Mortar token.",
+  "color": "any",
+  "stats": {
+    "defense": 2,
+    "toughness": 5
+  },
+  "baseActions": [
+    "attack",
+    "move"
+  ],
+  "specialAction": {
+    "name": "Roll Out the Cannon",
+    "summary": "Bring the old Army Cannon to the Territory edge nearest the Cannoneer, aimed any way. Load the Blast and loose it. Every Hand within range — friend and foe — takes Lead equal to the side the Blast token landed on. No valid target needed.",
+    "effects": [
+      {
+        "kind": "catapult_launch",
+        "die": "mortar",
+        "range": "any",
+        "targets": "all",
+        "needsValidTarget": false,
+        "text": "Fire the Cannon (catapult)."
+      },
+      {
+        "kind": "area_effect",
+        "token": "heart",
+        "targets": "all",
+        "range": "any",
+        "needsValidTarget": false
+      },
+      {
+        "kind": "ignore_los",
+        "text": "The Cannon does not require a valid target."
+      }
+    ]
+  },
+  "superSoldiers": {
+    "specialAbility": {
+      "trigger": "per_lightning",
+      "summary": "For each Lightning, move 1 Lead from one Hand's card onto any other Hand in play (including an enemy).",
+      "effects": [
+        {
+          "kind": "transfer_token",
+          "count": 1,
+          "token": "heart",
+          "targets": "all",
+          "trigger": "per_lightning"
+        }
+      ]
+    },
+    "moveHeal": true
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "little_soldier",
+  "name": "Sharpshooter",
+  "confidence": "homebrew",
+  "flavor": "High Noon — picks you off from the ridgeline. Reskin of the Sniper; the Rifle die behaves like the Sniper die.",
+  "color": "any",
+  "stats": {
+    "defense": 3,
+    "toughness": 3
+  },
+  "baseActions": [
+    "attack",
+    "move"
+  ],
+  "specialAction": {
+    "name": "Buffalo Rifle",
+    "summary": "Make an Attack on a valid target and add the Rifle die to the Attack dice. Its good faces add hits; on a kicking-recoil face you take Lead (+2 or +1). The Rifle die re-rolls like the others but can never be modified.",
+    "effects": [
+      {
+        "kind": "augment_attack",
+        "die": "custom",
+        "count": 1,
+        "targets": "enemies",
+        "needsValidTarget": true,
+        "text": "Add the Rifle die (Sniper-die analog) to the Attack pool."
+      },
+      {
+        "kind": "self_risk",
+        "die": "custom",
+        "token": "heart",
+        "text": "Recoil faces add +2 or +1 Lead to the Sharpshooter."
+      }
+    ]
+  },
+  "superSoldiers": {
+    "specialAbility": {
+      "trigger": "per_lightning",
+      "summary": "For each Lightning, place 1 Drop token on the target after your Attack (lowering its Cover).",
+      "effects": [
+        {
+          "kind": "place_tokens",
+          "count": 1,
+          "token": "scout",
+          "targets": "enemies",
+          "trigger": "per_lightning",
+          "needsValidTarget": true
+        }
+      ]
+    },
+    "moveHeal": true
+  }
+}

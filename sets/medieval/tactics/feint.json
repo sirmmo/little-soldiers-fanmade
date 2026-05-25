@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Feint",
+  "confidence": "homebrew",
+  "flavor": "Realms at War Stratagem — a signature Reaction card of King Aldric (House Stag).",
+  "cardType": "reaction",
+  "owner": "King Aldric of House Stag",
+  "reactionTrigger": "When an opposing player declares a valid target.",
+  "summary": "That opponent rolls 1 fewer die for their Attack.",
+  "effects": [
+    {
+      "kind": "modify_rerolls",
+      "count": -1,
+      "targets": "enemies",
+      "trigger": "reaction:on_target_declared",
+      "text": "Attacker rolls one fewer Attack die."
+    }
+  ]
+}

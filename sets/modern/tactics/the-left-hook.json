@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "The Left Hook",
+  "confidence": "homebrew",
+  "flavor": "Combined Arms Doctrine — Schwarzkopf's wide flanking envelopment in the Gulf: swing around the open flank and hit them where they aren't looking.",
+  "cardType": "soldier",
+  "orderCondition": 2,
+  "owner": "Norman Schwarzkopf",
+  "summary": "The chosen unit makes a straight-line Move, then makes 1 Attack that ignores line of sight (it has flanked into the enemy's rear).",
+  "effects": [
+    {
+      "kind": "straight_line_move",
+      "targets": "self",
+      "text": "Flanking sweep: a full straight-line Move."
+    },
+    {
+      "kind": "extra_attacks",
+      "count": 1,
+      "targets": "enemies",
+      "needsValidTarget": false,
+      "text": "Then make 1 Attack from the flank."
+    },
+    {
+      "kind": "ignore_los",
+      "text": "The flank attack ignores cover/line of sight."
+    }
+  ]
+}

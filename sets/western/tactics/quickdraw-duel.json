@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Quickdraw Duel",
+  "confidence": "homebrew",
+  "flavor": "High Noon Gambit — Billy the Kid's signature Reaction. You drew faster: the other fella never got his shot off.",
+  "cardType": "reaction",
+  "owner": "Billy the Kid",
+  "reactionTrigger": "When an opposing player declares a valid target against one of your Hands.",
+  "summary": "Before that Attack is rolled, the targeted Hand immediately makes 1 Attack of its own (draw first).",
+  "effects": [
+    {
+      "kind": "extra_attacks",
+      "count": 1,
+      "targets": "enemies",
+      "needsValidTarget": true,
+      "trigger": "reaction:on_target_declared",
+      "text": "The targeted Hand draws first and makes 1 Attack."
+    }
+  ]
+}

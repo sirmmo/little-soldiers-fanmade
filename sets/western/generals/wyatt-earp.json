@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "general",
+  "name": "Wyatt Earp",
+  "confidence": "homebrew",
+  "flavor": "High Noon — reprising the Tombstone lawman of the O.K. Corral. Cold and unhurried: walks straight into the fight and ends it. Leads the Lawmen.",
+  "color": "green",
+  "orderAction": {
+    "name": "The Word",
+    "summary": "Play 1 Grit token on one of your Hands currently in play.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "order",
+        "targets": "allies",
+        "range": "any",
+        "needsValidTarget": false
+      }
+    ]
+  },
+  "signatureTactics": [
+    "The Walk-Down",
+    "Dead Eye",
+    "Rally the Posse"
+  ]
+}

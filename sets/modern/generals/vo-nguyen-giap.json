@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "general",
+  "name": "Võ Nguyên Giáp",
+  "confidence": "homebrew",
+  "flavor": "Combined Arms (Modern) — reprising the strategist of Dien Bien Phu and the People's War. Asymmetric attrition: harass from everywhere, refuse the decisive battle, and endure. Rewards wearing the enemy down while staying in the fight.",
+  "color": "any",
+  "orderAction": {
+    "name": "Command",
+    "summary": "Play 1 Command token on one of your units currently in play.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "order",
+        "targets": "allies",
+        "range": "any",
+        "needsValidTarget": false
+      }
+    ]
+  },
+  "signatureTactics": [
+    "People's War",
+    "Suppressing Fire",
+    "Rapid Redeployment"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "object",
+  "name": "Runaway Wagon",
+  "confidence": "homebrew",
+  "flavor": "High Noon — a spooked team bolts and drags the wagon across the street, scattering everyone. Reskin of the Transmogrifier.",
+  "twoSided": false,
+  "summary": "Activate at the end of a Move in contact (no enemy also touching): swap the positions of any two Hands in play (with their tokens), no matter whose they are. Mark their spots with Move tokens before swapping.",
+  "effects": [
+    {
+      "kind": "swap_positions",
+      "count": 2,
+      "targets": "all",
+      "text": "Swap any two Hands' positions, carrying their tokens."
+    }
+  ]
+}

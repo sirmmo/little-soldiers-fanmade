@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "threat",
+  "name": "The Old Wyrm",
+  "confidence": "homebrew",
+  "flavor": "Realms at War — a co-op boss for the Missions style of play. Both houses must set aside their feud and bring it down before it razes the great hall. Armour/Vigour tuned above the player curve for a boss.",
+  "stats": {
+    "defense": 5,
+    "toughness": 8
+  },
+  "target": "The Wyrm's eye on the miniature; used for line-of-sight and range to it.",
+  "attack": {
+    "name": "Wrath of the Wyrm",
+    "summary": "Every Threats' turn: place 1 Wound on all valid targets (raking claws), then 1 Wound on all Warriors in play whether valid targets or not (sweeping tail). Each Lightning rolled in the collective attack adds 1 more Wound to each valid target.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "heart",
+        "targets": "enemies",
+        "needsValidTarget": true,
+        "text": "Claws: 1 Wound on all valid targets."
+      },
+      {
+        "kind": "area_effect",
+        "count": 1,
+        "token": "heart",
+        "targets": "enemies",
+        "range": "any",
+        "needsValidTarget": false,
+        "text": "Tail sweep: 1 Wound on all Warriors in play."
+      }
+    ]
+  },
+  "superSpecialAbility": {
+    "trigger": "three_plus_lightning",
+    "summary": "Inferno: on 3+ Lightning in the collective Threat attack, the Wyrm breathes fire — place 2 Wounds on every Warrior in play.",
+    "effects": [
+      {
+        "kind": "area_effect",
+        "count": 2,
+        "token": "heart",
+        "targets": "enemies",
+        "range": "any",
+        "needsValidTarget": false,
+        "trigger": "three_plus_lightning"
+      }
+    ]
+  },
+  "forceField": {
+    "switchNumbers": [
+      1,
+      2
+    ],
+    "requiresAllSwitches": true
+  }
+}

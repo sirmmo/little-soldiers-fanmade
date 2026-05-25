@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Rally to the Crown",
+  "confidence": "homebrew",
+  "flavor": "Realms at War Stratagem — a signature card of Queen Mara (House Wolf). Mirrors the base game's General's Orders.",
+  "cardType": "general",
+  "orderCondition": 2,
+  "owner": "Queen Mara of House Wolf",
+  "summary": "Gain Bonus Command tokens. They work like Command tokens but are returned to the Reserve at the end of the Round.",
+  "effects": [
+    {
+      "kind": "grant_order",
+      "count": 3,
+      "token": "bonus_order",
+      "targets": "allies",
+      "text": "Take the 3 Bonus Command tokens from the Reserve."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "object",
+  "name": "Magic Portal",
+  "confidence": "homebrew",
+  "flavor": "Magestone (Mage Knight) — a shimmering gate between two points of power. Reskin of the Teleporter.",
+  "twoSided": false,
+  "summary": "Activate at the end of a Move in contact (no enemy also touching): place your Unit in contact with any other Magic Portal in play. This immediately ends your Move. A Fireball die or Boulder touching a Portal may be sent through just before it lands.",
+  "effects": [
+    {
+      "kind": "teleport",
+      "targets": "self",
+      "text": "Relocate to any other Magic Portal in play; ends the Move."
+    }
+  ]
+}

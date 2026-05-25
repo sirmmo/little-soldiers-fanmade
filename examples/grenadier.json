@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "little_soldier",
+  "name": "Grenadier",
+  "confidence": "card-scan",
+  "flavor": "Toughness 6 and the Super Soldiers ability are confirmed (Books 1 & 2). The Defense value is NOT legible in the rulebooks (the card appears only as a thumbnail) — the 2 below is a placeholder; read the real value off the physical card.",
+  "color": "any",
+  "stats": {
+    "defense": 2,
+    "toughness": 6
+  },
+  "baseActions": [
+    "attack",
+    "move"
+  ],
+  "specialAction": {
+    "name": "Throw a Grenade",
+    "summary": "Place a green Move token in contact with the figurine, set the Grenade die on it, and flick it toward your targets (it must roll). All figurines, ally or enemy, within yellow range of the die suffer an attack of the rolled value (3, 5 or 7). On a Boom! result only the Grenadier is hit for 7, wherever they are. No valid target needed.",
+    "effects": [
+      {
+        "kind": "dice_launch",
+        "die": "grenade",
+        "range": "yellow",
+        "targets": "all",
+        "needsValidTarget": false
+      },
+      {
+        "kind": "ignore_los",
+        "text": "Grenades do not require a valid target."
+      },
+      {
+        "kind": "self_risk",
+        "die": "grenade",
+        "text": "Boom! result hits only the Grenadier for value 7."
+      }
+    ]
+  },
+  "superSoldiers": {
+    "specialAbility": {
+      "trigger": "per_lightning",
+      "summary": "For each Lightning, choose an additional valid target and apply this Attack's hit results to it as well (attack several opponents at once).",
+      "effects": [
+        {
+          "kind": "multi_target",
+          "count": 1,
+          "targets": "enemies",
+          "trigger": "per_lightning",
+          "needsValidTarget": true
+        }
+      ]
+    },
+    "moveHeal": true
+  }
+}

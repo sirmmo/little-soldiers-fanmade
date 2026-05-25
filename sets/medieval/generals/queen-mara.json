@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "general",
+  "name": "Queen Mara of House Wolf",
+  "confidence": "homebrew",
+  "flavor": "Realms at War — the aggressive, fast-striking Lady of House Wolf. Favours forced marches and bold assaults.",
+  "color": "yellow",
+  "orderAction": {
+    "name": "Command",
+    "summary": "Play 1 Command token on one of your Warriors currently in play.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "order",
+        "targets": "allies",
+        "range": "any",
+        "needsValidTarget": false
+      }
+    ]
+  },
+  "signatureTactics": [
+    "Forced March",
+    "Rally to the Crown",
+    "Ambush"
+  ]
+}

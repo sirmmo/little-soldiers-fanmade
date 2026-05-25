@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Desert Maneuver",
+  "confidence": "homebrew",
+  "flavor": "Realms at War Stratagem — a signature card of Saladin. Superior mobility: strike, then be gone before the counterblow lands.",
+  "cardType": "soldier",
+  "orderCondition": 2,
+  "owner": "Saladin",
+  "summary": "The chosen Warrior makes 3 Moves.",
+  "effects": [
+    {
+      "kind": "extra_move",
+      "count": 3,
+      "targets": "self",
+      "text": "The chosen Warrior makes 3 Moves."
+    }
+  ]
+}

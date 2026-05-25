@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "object",
+  "name": "Portcullis",
+  "confidence": "homebrew",
+  "flavor": "Realms at War — the great iron gate. Reskin of the Switch. Activate at the end of a Move to raise or lower it.",
+  "twoSided": true,
+  "summary": "Flip the Portcullis token. While it is shut (dark side showing), sightlines through the gate are choked: for each shut Portcullis on the Field, ALL players have 1 fewer reroll when Attacking.",
+  "effects": [
+    {
+      "kind": "modify_rerolls",
+      "count": -1,
+      "targets": "all",
+      "text": "While shut, every Attack on the Field has -1 reroll."
+    }
+  ]
+}

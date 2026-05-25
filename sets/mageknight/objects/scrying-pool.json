@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "object",
+  "name": "Scrying Pool",
+  "confidence": "homebrew",
+  "flavor": "Magestone (Mage Knight) — gaze into the waters to find the enemy's weak points. Reskin of the Radar.",
+  "twoSided": false,
+  "summary": "Activate at the end of a Move in contact (no enemy also touching): place up to 2 Hex tokens on enemy Units anywhere on the Battlefield, weakening their Armor.",
+  "effects": [
+    {
+      "kind": "place_tokens",
+      "count": 2,
+      "token": "scout",
+      "targets": "enemies",
+      "range": "any",
+      "needsValidTarget": false
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Crystal Mastery",
+  "confidence": "homebrew",
+  "flavor": "Magestone Spell — Goldyx's signature. Draw deep on the mana crystals and shape the moment to your need.",
+  "cardType": "general",
+  "orderCondition": 1,
+  "owner": "Goldyx",
+  "summary": "Draw 2 Spells from the deck.",
+  "effects": [
+    {
+      "kind": "draw_cards",
+      "count": 2,
+      "text": "Draw 2 Spell cards."
+    }
+  ]
+}

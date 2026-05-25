@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "threat",
+  "name": "The Grizzly King",
+  "confidence": "homebrew",
+  "flavor": "High Noon — a co-op boss for the Missions style of play. Lawmen and Outlaws call a truce to bring down the giant bear terrorizing the Territory. Cover/Sand tuned above the player curve for a boss.",
+  "stats": {
+    "defense": 5,
+    "toughness": 8
+  },
+  "target": "The Grizzly's snout on the miniature; used for line-of-sight and range to it.",
+  "attack": {
+    "name": "Rampage",
+    "summary": "Every Threats' turn: place 1 Lead on all valid targets (swiping claws), then 1 Lead on all Hands in play whether valid targets or not (it charges through). Each Lightning rolled in the collective attack adds 1 more Lead to each valid target.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "heart",
+        "targets": "enemies",
+        "needsValidTarget": true,
+        "text": "Claws: 1 Lead on all valid targets."
+      },
+      {
+        "kind": "area_effect",
+        "count": 1,
+        "token": "heart",
+        "targets": "enemies",
+        "range": "any",
+        "needsValidTarget": false,
+        "text": "Charge: 1 Lead on all Hands in play."
+      }
+    ]
+  },
+  "superSpecialAbility": {
+    "trigger": "three_plus_lightning",
+    "summary": "Maul: on 3+ Lightning in the collective Threat attack, the Grizzly goes berserk — place 2 Lead on every Hand in play.",
+    "effects": [
+      {
+        "kind": "area_effect",
+        "count": 2,
+        "token": "heart",
+        "targets": "enemies",
+        "range": "any",
+        "needsValidTarget": false,
+        "trigger": "three_plus_lightning"
+      }
+    ]
+  },
+  "forceField": {
+    "switchNumbers": [
+      1,
+      2
+    ],
+    "requiresAllSwitches": true
+  }
+}

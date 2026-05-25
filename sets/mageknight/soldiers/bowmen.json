@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "little_soldier",
+  "name": "Bowmen",
+  "confidence": "homebrew",
+  "flavor": "Magestone (Mage Knight) — picks off the foe at range. Reskin of the Sniper; the Bolt die behaves like the Sniper die. figureCandidates from Mage Knight: Resurrection (minisgallery.com); pick any figure with a ranged attack on its dial — Resurrection has few dedicated archers, so role assignment is editorial.",
+  "color": "any",
+  "stats": { "defense": 3, "toughness": 3 },
+  "baseActions": ["attack", "move"],
+  "specialAction": {
+    "name": "Aimed Bolt",
+    "summary": "Make an Attack on a valid target and add the Bolt die to the Attack dice. Its good faces add hits; on a misfire face you take Wounds (+2 or +1). The Bolt die re-rolls like the others but can never be modified.",
+    "effects": [
+      { "kind": "augment_attack", "die": "custom", "count": 1, "targets": "enemies", "needsValidTarget": true, "text": "Add the Bolt die (Sniper-die analog) to the Attack pool." },
+      { "kind": "self_risk", "die": "custom", "token": "heart", "text": "Misfire faces add +2 or +1 Wound to the Bowmen." }
+    ]
+  },
+  "superSoldiers": {
+    "specialAbility": {
+      "trigger": "per_lightning",
+      "summary": "For each Lightning, place 1 Hex token on the target after your Attack (weakening its Armor).",
+      "effects": [ { "kind": "place_tokens", "count": 1, "token": "scout", "targets": "enemies", "trigger": "per_lightning", "needsValidTarget": true } ]
+    },
+    "moveHeal": true
+  },
+  "figureCandidates": [
+    { "name": "Xandressan Windsman", "set": "Resurrection", "rarity": "Common", "collectorNumber": "4", "roleFit": "Wind/skirmisher — best common stand-in for a ranged trooper.", "verified": true },
+    { "name": "Skyguard Captain", "set": "Resurrection", "rarity": "Uncommon", "collectorNumber": "16", "roleFit": "Airborne strike from range; a stronger ranged option.", "verified": true },
+    { "name": "Technoshocker", "set": "Resurrection", "rarity": "Uncommon", "collectorNumber": "18", "roleFit": "Ranged shock attacker, if you want a heavier shot.", "verified": true }
+  ]
+}

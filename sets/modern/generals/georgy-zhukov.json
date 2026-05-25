@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "general",
+  "name": "Georgy Zhukov",
+  "confidence": "homebrew",
+  "flavor": "Combined Arms (WW2) — reprising the Soviet marshal of Stalingrad, Kursk and Berlin. Architect of 'deep operations': concentrate overwhelming mass across the whole front and grind the enemy down. Rewards coordinated, army-wide action.",
+  "color": "any",
+  "orderAction": {
+    "name": "Command",
+    "summary": "Play 1 Command token on one of your units currently in play.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "order",
+        "targets": "allies",
+        "range": "any",
+        "needsValidTarget": false
+      }
+    ]
+  },
+  "signatureTactics": [
+    "Deep Operation",
+    "Overwhelming Force",
+    "Combined Arms"
+  ]
+}

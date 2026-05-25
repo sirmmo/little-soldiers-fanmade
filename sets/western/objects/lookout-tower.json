@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "object",
+  "name": "Lookout Tower",
+  "confidence": "homebrew",
+  "flavor": "High Noon — the town water tower; climb it and you can spot the whole street. Reskin of the Radar.",
+  "twoSided": false,
+  "summary": "Activate at the end of a Move in contact (no enemy also touching): place up to 2 Drop tokens on enemy Hands anywhere in the Territory, lowering their Cover.",
+  "effects": [
+    {
+      "kind": "place_tokens",
+      "count": 2,
+      "token": "scout",
+      "targets": "enemies",
+      "range": "any",
+      "needsValidTarget": false
+    }
+  ]
+}

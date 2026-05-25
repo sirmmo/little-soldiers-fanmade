@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Feigned Retreat",
+  "confidence": "homebrew",
+  "flavor": "Realms at War Stratagem — a signature Reaction card of Saladin. Slip away from the blow, then turn on the over-extended foe. The classic lure of the steppe and desert.",
+  "cardType": "reaction",
+  "owner": "Saladin",
+  "reactionTrigger": "When an opposing player declares a valid target against one of your Warriors.",
+  "summary": "Before the Attack is rolled, the targeted Warrior immediately makes 1 Move. If it is no longer a valid target afterwards, the Attack is wasted.",
+  "effects": [
+    {
+      "kind": "extra_move",
+      "count": 1,
+      "targets": "self",
+      "trigger": "reaction:on_target_declared",
+      "text": "The targeted Warrior makes 1 Move (it may break line of sight)."
+    }
+  ]
+}

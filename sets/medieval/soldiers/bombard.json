@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "little_soldier",
+  "name": "Bombard",
+  "confidence": "homebrew",
+  "flavor": "Realms at War — a powder-monk who lobs clay firepots. Medieval counterpart of the Grenadier; the Firepot die behaves like the Grenade die.",
+  "color": "any",
+  "stats": {
+    "defense": 2,
+    "toughness": 6
+  },
+  "baseActions": [
+    "attack",
+    "move"
+  ],
+  "specialAction": {
+    "name": "Hurl Firepot",
+    "summary": "Place a green Move token by the figurine, set the Firepot die on it, and flick it toward your foes (it must roll). All Warriors, friend or foe, within yellow range of the die suffer an attack of the rolled value (3, 5 or 7). On a misthrow it bursts in your hand: only the Bombard is hit for 7. No valid target needed.",
+    "effects": [
+      {
+        "kind": "dice_launch",
+        "die": "custom",
+        "range": "yellow",
+        "targets": "all",
+        "needsValidTarget": false,
+        "text": "Flick the Firepot die (Grenade-die analog)."
+      },
+      {
+        "kind": "ignore_los",
+        "text": "Firepots do not require a valid target."
+      },
+      {
+        "kind": "self_risk",
+        "die": "custom",
+        "text": "Misthrow burst hits only the Bombard for 7."
+      }
+    ]
+  },
+  "superSoldiers": {
+    "specialAbility": {
+      "trigger": "per_lightning",
+      "summary": "For each Lightning, choose an additional valid target and apply this Attack's hits to it as well.",
+      "effects": [
+        {
+          "kind": "multi_target",
+          "count": 1,
+          "targets": "enemies",
+          "trigger": "per_lightning",
+          "needsValidTarget": true
+        }
+      ]
+    },
+    "moveHeal": true
+  }
+}

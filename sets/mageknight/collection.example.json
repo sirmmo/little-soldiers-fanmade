@@ -1,0 +1,16 @@
+{
+  "name": "Example Mage Knight: Resurrection collection",
+  "note": "A sample of owned figures from the Resurrection set. Edit to your shelf, then run: python3 tools/match-collection.py sets/mageknight/collection.example.json sets/mageknight/soldiers sets/mageknight/generals sets/mageknight/threats",
+  "figures": [
+    { "name": "Attem Sentinel" },
+    { "name": "Skeleton Skullwalker" },
+    { "name": "Xandressan Windsman" },
+    { "name": "Bonebreaker Shaman" },
+    { "name": "Technoshocker" },
+    { "name": "Moonborn Dunewolf" },
+    { "name": "Cavalier Freeblade" },
+    { "name": "Tovak" },
+    { "name": "Arythea" },
+    { "name": "General Volkare" }
+  ]
+}

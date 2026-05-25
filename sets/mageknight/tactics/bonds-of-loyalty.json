@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Bonds of Loyalty",
+  "confidence": "homebrew",
+  "flavor": "Magestone Spell — Norowas's signature. His allies fight as one at his word.",
+  "cardType": "general",
+  "orderCondition": 3,
+  "owner": "Norowas",
+  "summary": "Up to 3 different allied Units each make 1 Attack.",
+  "effects": [
+    {
+      "kind": "extra_attacks",
+      "count": 3,
+      "targets": "enemies",
+      "needsValidTarget": true,
+      "text": "Spread across up to 3 different allied Units: each makes 1 Attack."
+    }
+  ]
+}

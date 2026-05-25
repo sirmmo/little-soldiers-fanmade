@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "object",
+  "name": "Magical Glade",
+  "confidence": "homebrew",
+  "flavor": "Magestone (Mage Knight) — a place of healing power in the wilds (Magical Glades restore in Mage Knight). A restorative twist on the Object slot.",
+  "twoSided": false,
+  "summary": "Activate at the end of a Move in contact (no enemy also touching): remove up to 2 Wounds from the Unit that reached the Glade.",
+  "effects": [
+    {
+      "kind": "self_heal",
+      "count": 2,
+      "token": "heart",
+      "targets": "self",
+      "text": "Remove up to 2 Wounds from this Unit."
+    }
+  ]
+}

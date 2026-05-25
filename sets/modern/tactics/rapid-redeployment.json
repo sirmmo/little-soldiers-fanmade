@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Rapid Redeployment",
+  "confidence": "homebrew",
+  "flavor": "Combined Arms Doctrine — motorized speed: be somewhere the enemy isn't.",
+  "cardType": "soldier",
+  "orderCondition": 2,
+  "summary": "The chosen unit makes 3 Moves.",
+  "effects": [
+    {
+      "kind": "extra_move",
+      "count": 3,
+      "targets": "self",
+      "text": "The chosen unit makes 3 Moves."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "CASEVAC",
+  "confidence": "homebrew",
+  "flavor": "Combined Arms Doctrine — casualty evacuation: no soldier left behind, and back in the fight.",
+  "cardType": "general",
+  "orderCondition": 1,
+  "summary": "Remove up to 2 Casualties from one allied unit in play.",
+  "effects": [
+    {
+      "kind": "self_heal",
+      "count": 2,
+      "token": "heart",
+      "targets": "allies",
+      "range": "any",
+      "text": "Remove up to 2 Casualties from one allied unit."
+    }
+  ]
+}

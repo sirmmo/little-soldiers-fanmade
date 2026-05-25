@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "little_soldier",
+  "name": "Sawbones",
+  "confidence": "homebrew",
+  "flavor": "High Noon — new archetype. The frontier doc: no real fight in him, fragile, but keeps the outfit on its feet. Mirrors the Medic worked example.",
+  "color": "any",
+  "stats": {
+    "defense": 2,
+    "toughness": 4
+  },
+  "baseActions": [
+    "attack",
+    "move"
+  ],
+  "specialAction": {
+    "name": "Patch 'Em Up",
+    "summary": "Remove up to 2 Lead total, split between this Hand and one allied Hand within yellow range. No valid target needed.",
+    "effects": [
+      {
+        "kind": "self_heal",
+        "count": 1,
+        "token": "heart",
+        "targets": "self"
+      },
+      {
+        "kind": "self_heal",
+        "count": 1,
+        "token": "heart",
+        "targets": "allies",
+        "range": "yellow",
+        "needsValidTarget": false,
+        "text": "Remove up to 1 Lead from an ally in yellow range."
+      }
+    ]
+  },
+  "superSoldiers": {
+    "specialAbility": {
+      "trigger": "per_lightning",
+      "summary": "For each Lightning, remove 1 extra Lead from an allied Hand within yellow range.",
+      "effects": [
+        {
+          "kind": "self_heal",
+          "count": 1,
+          "token": "heart",
+          "targets": "allies",
+          "range": "yellow",
+          "trigger": "per_lightning"
+        }
+      ]
+    },
+    "moveHeal": true
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "object",
+  "name": "Sorcerer's Circle",
+  "confidence": "homebrew",
+  "flavor": "Realms at War — a ring of standing stones humming with old magic. Reskin of the Transmogrifier.",
+  "twoSided": false,
+  "summary": "Activate at the end of a Move in contact (no enemy also touching): swap the positions of any two Warriors in play (with their tokens), no matter whose they are. Mark their spots with Move tokens before swapping.",
+  "effects": [
+    {
+      "kind": "swap_positions",
+      "count": 2,
+      "targets": "all",
+      "text": "Swap any two Warriors' positions, carrying their tokens."
+    }
+  ]
+}

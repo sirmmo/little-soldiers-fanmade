@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "general",
+  "name": "Arythea",
+  "confidence": "homebrew",
+  "flavor": "Magestone (Mage Knight) — reprising the fierce red Mage Knight, a blood-and-fire fury. Burns through her foes and her own reserves alike; aggression is the only plan.",
+  "color": "any",
+  "orderAction": {
+    "name": "Command",
+    "summary": "Play 1 Command token on one of your Units currently in play.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "order",
+        "targets": "allies",
+        "range": "any",
+        "needsValidTarget": false
+      }
+    ]
+  },
+  "signatureTactics": [
+    "Blood Rage",
+    "Fireball",
+    "Swiftness"
+  ],
+  "figureCandidates": [
+    { "name": "Arythea", "set": "Resurrection", "rarity": "Uncommon", "collectorNumber": "13", "roleFit": "The Arythea hero figure itself.", "verified": true }
+  ]
+}

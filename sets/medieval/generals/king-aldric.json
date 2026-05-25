@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "general",
+  "name": "King Aldric of House Stag",
+  "confidence": "homebrew",
+  "flavor": "Realms at War — the steady, disciplined Lord of House Stag. Favours formation fighting and massed archery.",
+  "color": "green",
+  "orderAction": {
+    "name": "Command",
+    "summary": "Play 1 Command token on one of your Warriors currently in play.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "order",
+        "targets": "allies",
+        "range": "any",
+        "needsValidTarget": false
+      }
+    ]
+  },
+  "signatureTactics": [
+    "Volley Fire",
+    "Hold the Line",
+    "Feint"
+  ]
+}

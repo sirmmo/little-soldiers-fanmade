@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "little_soldier",
+  "name": "Medic",
+  "confidence": "homebrew",
+  "flavor": "Worked example from FRAMEWORK.md §7 — a support unit built entirely from existing primitives. Low Defense and modest Toughness because it adds no offense; recovery is strong.",
+  "color": "any",
+  "stats": {
+    "defense": 2,
+    "toughness": 4
+  },
+  "baseActions": [
+    "attack",
+    "move"
+  ],
+  "specialAction": {
+    "name": "Field Dressing",
+    "summary": "Remove up to 2 Hearts total, split between this Little Soldier and one allied Little Soldier within yellow range. No valid target needed.",
+    "effects": [
+      {
+        "kind": "self_heal",
+        "count": 1,
+        "token": "heart",
+        "targets": "self"
+      },
+      {
+        "kind": "self_heal",
+        "count": 1,
+        "token": "heart",
+        "targets": "allies",
+        "range": "yellow",
+        "needsValidTarget": false,
+        "text": "Remove up to 1 Heart from an ally in yellow range."
+      }
+    ]
+  },
+  "superSoldiers": {
+    "specialAbility": {
+      "trigger": "per_lightning",
+      "summary": "For each Lightning, remove 1 additional Heart from an allied Little Soldier within yellow range.",
+      "effects": [
+        {
+          "kind": "self_heal",
+          "count": 1,
+          "token": "heart",
+          "targets": "allies",
+          "range": "yellow",
+          "trigger": "per_lightning"
+        }
+      ]
+    },
+    "moveHeal": true
+  }
+}

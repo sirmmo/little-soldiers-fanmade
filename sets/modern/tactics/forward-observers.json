@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Forward Observers",
+  "confidence": "homebrew",
+  "flavor": "Combined Arms Doctrine — spotters mark targets for the guns; the marked are easy prey.",
+  "cardType": "general",
+  "orderCondition": 2,
+  "summary": "Place 1 Suppression token on each of up to 3 enemy units anywhere in the Theatre (lowering their Cover).",
+  "effects": [
+    {
+      "kind": "place_tokens",
+      "count": 3,
+      "token": "scout",
+      "targets": "enemies",
+      "range": "any",
+      "needsValidTarget": false,
+      "text": "Up to 3 different enemy units each gain 1 Suppression token."
+    }
+  ]
+}

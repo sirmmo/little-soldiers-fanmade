@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Volley Fire",
+  "confidence": "homebrew",
+  "flavor": "Realms at War Stratagem — a signature card of King Aldric (House Stag).",
+  "cardType": "soldier",
+  "orderCondition": 2,
+  "owner": "King Aldric of House Stag",
+  "summary": "Make up to 3 Attacks on different targets.",
+  "effects": [
+    {
+      "kind": "extra_attacks",
+      "count": 3,
+      "targets": "enemies",
+      "text": "Up to 3 Attacks, each on a different valid target."
+    }
+  ]
+}

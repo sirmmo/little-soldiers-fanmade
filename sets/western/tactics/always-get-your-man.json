@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Always Get Your Man",
+  "confidence": "homebrew",
+  "flavor": "High Noon Gambit — Bass Reeves's signature. He never quit a chase: strike, then run the quarry down.",
+  "cardType": "soldier",
+  "orderCondition": 3,
+  "owner": "Bass Reeves",
+  "summary": "The chosen Hand makes 2 Attacks, then 1 Move.",
+  "effects": [
+    {
+      "kind": "extra_attacks",
+      "count": 2,
+      "targets": "enemies",
+      "needsValidTarget": true,
+      "text": "Make 2 Attacks."
+    },
+    {
+      "kind": "extra_move",
+      "count": 1,
+      "targets": "self",
+      "text": "Then make 1 Move (run them down)."
+    }
+  ]
+}

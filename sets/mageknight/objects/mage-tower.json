@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "object",
+  "name": "Mage Tower",
+  "confidence": "homebrew",
+  "flavor": "Magestone (Mage Knight) — a wizard's spire whose wards smother sightlines in haze. Reskin of the Switch. Activate at the end of a Move to raise or lower the ward.",
+  "twoSided": true,
+  "summary": "Flip the Mage Tower token. While its ward is raised (dark side showing), a magical haze fouls aim: for each raised Mage Tower in play, ALL players have 1 fewer reroll when Attacking.",
+  "effects": [
+    {
+      "kind": "modify_rerolls",
+      "count": -1,
+      "targets": "all",
+      "text": "While the ward is raised, every Attack has -1 reroll."
+    }
+  ]
+}

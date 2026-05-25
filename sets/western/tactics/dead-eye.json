@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Dead Eye",
+  "confidence": "homebrew",
+  "flavor": "High Noon Gambit — steady the hand, hold your breath, make it count.",
+  "cardType": "reaction",
+  "reactionTrigger": "When you are about to apply the results of one of your Attacks.",
+  "summary": "Gain 1 additional reroll on that Attack.",
+  "effects": [
+    {
+      "kind": "modify_rerolls",
+      "count": 1,
+      "targets": "self",
+      "trigger": "reaction:before_resolve_attack",
+      "text": "Your Attack gains +1 reroll."
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "general",
+  "name": "Saladin",
+  "confidence": "homebrew",
+  "flavor": "Realms at War — legendary commander reprising Salah ad-Din, the Ayyubid sultan. A master of maneuver, attrition and the feigned retreat; at Hattin he used superior mobility to harass, encircle and exhaust his foe. Renowned for chivalry. His Stratagems reward mobility and wearing the enemy down rather than meeting them head-on.",
+  "color": "yellow",
+  "orderAction": {
+    "name": "Command",
+    "summary": "Play 1 Command token on one of your Warriors currently in play.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "order",
+        "targets": "allies",
+        "range": "any",
+        "needsValidTarget": false
+      }
+    ]
+  },
+  "signatureTactics": [
+    "Feigned Retreat",
+    "Encirclement at Hattin",
+    "Desert Maneuver"
+  ]
+}

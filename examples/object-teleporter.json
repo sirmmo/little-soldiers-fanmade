@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "object",
+  "name": "Teleporter",
+  "confidence": "confirmed",
+  "flavor": "Objects module. Place on the table or on scenery (the whole object then carries this power). Activate when YOUR Little Soldier ends a Move in contact and no opponent is also touching it.",
+  "twoSided": false,
+  "summary": "Place your Little Soldier in contact with any other Teleporter in play (even one an opponent is touching). This immediately ends your Move. A Grenade die or Mortar token touching a Teleporter may be teleported just before it explodes.",
+  "effects": [
+    {
+      "kind": "teleport",
+      "targets": "self",
+      "text": "Relocate to any other Teleporter in play; ends the Move."
+    }
+  ]
+}

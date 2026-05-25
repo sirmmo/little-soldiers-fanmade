@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "object",
+  "name": "Watchtower",
+  "confidence": "homebrew",
+  "flavor": "Realms at War — a lookout post that marks the foe's weak points. Reskin of the Radar.",
+  "twoSided": false,
+  "summary": "Activate at the end of a Move in contact (no enemy also touching): place up to 2 Exposed tokens on enemy Warriors anywhere on the Field, lowering their Armour.",
+  "effects": [
+    {
+      "kind": "place_tokens",
+      "count": 2,
+      "token": "scout",
+      "targets": "enemies",
+      "range": "any",
+      "needsValidTarget": false
+    }
+  ]
+}

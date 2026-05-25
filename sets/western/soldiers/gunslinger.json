@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "little_soldier",
+  "name": "Gunslinger",
+  "confidence": "homebrew",
+  "flavor": "High Noon — new archetype. The fast-draw duelist: catches a foe flat-footed, then puts them down. Quick but not built to soak Lead (lower Sand). Playtest the +1 reroll.",
+  "color": "any",
+  "stats": {
+    "defense": 3,
+    "toughness": 4
+  },
+  "baseActions": [
+    "attack",
+    "move"
+  ],
+  "specialAction": {
+    "name": "Quickdraw",
+    "summary": "Place 1 Drop token on a valid target, then immediately Attack that target with +1 reroll.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "scout",
+        "targets": "enemies",
+        "needsValidTarget": true,
+        "text": "Catch them flat-footed: 1 Drop on the target."
+      },
+      {
+        "kind": "extra_attacks",
+        "count": 1,
+        "targets": "enemies",
+        "needsValidTarget": true,
+        "text": "Then Attack that target."
+      },
+      {
+        "kind": "modify_rerolls",
+        "count": 1,
+        "text": "That Attack gains +1 reroll."
+      }
+    ]
+  },
+  "superSoldiers": {
+    "specialAbility": {
+      "trigger": "per_lightning",
+      "summary": "For each Lightning, make 1 Move after this Attack.",
+      "effects": [
+        {
+          "kind": "extra_move",
+          "count": 1,
+          "trigger": "per_lightning"
+        }
+      ]
+    },
+    "moveHeal": true
+  }
+}

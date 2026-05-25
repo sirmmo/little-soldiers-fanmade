@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Little Soldiers — Printable Sheet Template</title>
+<style>
+  /* ----------------------------------------------------------------------
+     Little Soldiers — fill-in-the-blanks card template.
+     Print: A4, portrait. Each card is 65 x 90 mm (fits standard sleeves).
+     Type directly into the cards (they are contenteditable) or print blank
+     and write by hand. Slot positions mirror the real card anatomy
+     (FRAMEWORK.md §2-4).
+     ---------------------------------------------------------------------- */
+  :root{
+    --ink:#1f2933; --muted:#7b8794; --line:#cbd2d9;
+    --green:#2f9e44; --yellow:#f0a500; --red:#c92a2a; --navy:#1c3d5a;
+    --card-w:65mm; --card-h:90mm;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:"Segoe UI",system-ui,Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink); margin:0; padding:14mm 10mm; background:#eef1f4;
+  }
+  h1{font-size:18pt;margin:0 0 2mm;}
+  .intro{font-size:9pt;color:var(--muted);max-width:180mm;margin:0 0 8mm;line-height:1.4;}
+  .intro code{background:#dfe3e8;padding:0 3px;border-radius:3px;}
+
+  .sheet{display:flex;flex-wrap:wrap;gap:8mm;}
+
+  .card{
+    width:var(--card-w); height:var(--card-h);
+    border:1.4pt solid var(--ink); border-radius:4mm;
+    background:#fff; padding:3mm; display:flex; flex-direction:column;
+    position:relative; overflow:hidden; page-break-inside:avoid;
+  }
+  .card .corner-color{position:absolute;inset:0 0 auto 0;height:3mm;}
+  .card.green  .corner-color{background:var(--green);}
+  .card.yellow .corner-color{background:var(--yellow);}
+  .card.threat .corner-color{background:var(--red);}
+  .card.general .corner-color{background:var(--navy);}
+
+  /* ---- top band: stats + rank + type ---- */
+  .topband{display:flex;align-items:flex-start;justify-content:space-between;margin-top:2mm;}
+  .stats{display:flex;gap:2mm;}
+  .badge{width:9mm;height:9mm;display:flex;flex-direction:column;align-items:center;
+          justify-content:center;border-radius:50%;border:1.2pt solid var(--ink);
+          font-weight:700;font-size:11pt;line-height:1;}
+  .badge small{font-size:4pt;font-weight:600;color:var(--muted);text-transform:uppercase;}
+  .badge.def{background:#e3ecf5;border-color:var(--navy);}
+  .badge.tough{background:#fde7e7;border-color:var(--red);}
+  .rank{font-size:7pt;color:var(--muted);text-align:center;}
+  .rank .chev{font-size:13pt;line-height:1;color:var(--ink);}
+  .type{font-size:6.5pt;color:var(--muted);border:1pt dashed var(--line);
+        border-radius:3px;padding:1mm 1.5mm;text-align:center;max-width:18mm;}
+
+  /* ---- art / figurine area ---- */
+  .art{flex:1;margin:2mm 0;border:1pt dashed var(--line);border-radius:3mm;
+       display:flex;align-items:center;justify-content:center;color:var(--line);
+       font-size:7pt;letter-spacing:.5px;text-transform:uppercase;}
+
+  /* ---- name banner ---- */
+  .name{font-weight:800;font-size:13pt;text-transform:uppercase;letter-spacing:.5px;
+        padding:1mm 2mm;border-radius:2mm;background:#f1f3f5;border:1pt solid var(--line);
+        min-height:7mm;}
+
+  /* ---- actions band ---- */
+  .actions{margin-top:2mm;display:flex;flex-direction:column;gap:1mm;}
+  .act{display:flex;gap:1.5mm;font-size:7.5pt;align-items:baseline;}
+  .act .tag{font-weight:700;text-transform:uppercase;font-size:6.5pt;
+            background:var(--ink);color:#fff;border-radius:2px;padding:.3mm 1.2mm;flex:none;}
+  .act .body{flex:1;border-bottom:1pt dotted var(--line);min-height:4mm;}
+  .special .tag{background:var(--green);}
+  .ability .tag{background:var(--yellow);color:var(--ink);}
+  .superability .tag{background:var(--red);}
+
+  /* the back (Super Soldiers) side */
+  .card.back .name{background:#fff4d6;}
+  .pending{font-size:6pt;color:var(--red);font-style:italic;}
+
+  /* Tactics card + Object card (Modules book) */
+  .card.tactics .corner-color{background:#7048e8;}
+  .card.object  .corner-color{background:#0c8599;}
+  .cost{width:8mm;height:8mm;border-radius:2mm;border:1.4pt solid #7048e8;background:#efe7fd;
+        display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11pt;}
+  .ctype{font-size:6.5pt;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;}
+  .effect{flex:1;font-size:8pt;border:1pt dashed var(--line);border-radius:2mm;padding:2mm;margin-top:2mm;}
+
+  .label{font-size:6pt;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;}
+
+  [contenteditable]{outline:none;}
+  [contenteditable]:empty:before{content:attr(data-ph);color:var(--line);}
+
+  .legend{margin-top:8mm;font-size:8pt;color:var(--muted);max-width:180mm;line-height:1.5;}
+  .legend b{color:var(--ink);}
+
+  @media print{
+    body{background:#fff;padding:0;}
+    .intro,.legend,.noprint{display:none;}
+    @page{size:A4 portrait;margin:10mm;}
+    .card{box-shadow:none;}
+  }
+</style>
+</head>
+<body>
+
+<h1>Little Soldiers — Sheet Template</h1>
+<p class="intro noprint">
+  Fill in the cards (click to type) or print blank and write by hand. Slot positions follow
+  the card anatomy in <code>FRAMEWORK.md</code>. Cards are 65×90&nbsp;mm. The <b>back</b> (Super
+  Soldiers) side carries one <b>per-⚡ Special Ability</b> plus the universal <b>Move heal</b>
+  (Little Soldiers have no 3+⚡ tier — that's Threat-only). Tip: <code>Ctrl/Cmd-P</code> to
+  print; enable “Background graphics”.
+</p>
+
+<div class="sheet">
+
+  <!-- ============ LITTLE SOLDIER — FRONT (New Recruit) — EXAMPLE ============ -->
+  <div class="card yellow front">
+    <div class="corner-color"></div>
+    <div class="topband">
+      <div class="stats">
+        <div class="badge def"><span>2</span><small>Def</small></div>
+        <div class="badge tough"><span>5</span><small>Tough</small></div>
+      </div>
+      <div class="rank"><div class="chev">⌃</div>New&nbsp;Recruit</div>
+      <div class="type">Little Soldier</div>
+    </div>
+    <div class="art">figurine / art</div>
+    <div class="name" contenteditable data-ph="NAME">INFANTRY</div>
+    <div class="actions">
+      <div class="act"><span class="tag">Attack</span><span class="body"></span></div>
+      <div class="act"><span class="tag">Move</span><span class="body"></span></div>
+      <div class="act special"><span class="tag">Scout</span>
+        <span class="body" contenteditable>Place up to 2 Scout tokens on opponents (−def). No valid target.</span></div>
+    </div>
+  </div>
+
+  <!-- ============ LITTLE SOLDIER — BACK (Super Soldiers) — EXAMPLE ============ -->
+  <div class="card yellow back">
+    <div class="corner-color"></div>
+    <div class="topband">
+      <div class="stats">
+        <div class="badge def"><span>2</span><small>Def</small></div>
+        <div class="badge tough"><span>5</span><small>Tough</small></div>
+      </div>
+      <div class="rank"><div class="chev">⌃⌃</div>Super&nbsp;Soldiers</div>
+      <div class="type">Little Soldier</div>
+    </div>
+    <div class="art">figurine / art</div>
+    <div class="name">INFANTRY</div>
+    <div class="actions">
+      <div class="act ability"><span class="tag">⚡ Ability</span>
+        <span class="body">Per ⚡: Make 1 Move after this Attack.</span></div>
+      <div class="act ability"><span class="tag">Move</span>
+        <span class="body">Each Move may remove 1 ♥ from this card.</span></div>
+    </div>
+    <div class="label" style="margin-top:auto">⚡ = each Lightning rolled activates the Special Ability once (linear) · the Move heal is universal to all Super Soldiers</div>
+  </div>
+
+  <!-- ============ LITTLE SOLDIER — BLANK (front) ============ -->
+  <div class="card green front">
+    <div class="corner-color"></div>
+    <div class="topband">
+      <div class="stats">
+        <div class="badge def"><span contenteditable data-ph="?"></span><small>Def</small></div>
+        <div class="badge tough"><span contenteditable data-ph="?"></span><small>Tough</small></div>
+      </div>
+      <div class="rank"><div class="chev">⌃</div>New&nbsp;Recruit</div>
+      <div class="type">Little Soldier</div>
+    </div>
+    <div class="art">figurine / art</div>
+    <div class="name" contenteditable data-ph="NAME"></div>
+    <div class="actions">
+      <div class="act"><span class="tag">Attack</span><span class="body"></span></div>
+      <div class="act"><span class="tag">Move</span><span class="body"></span></div>
+      <div class="act special"><span class="tag" contenteditable data-ph="Special">Special</span>
+        <span class="body" contenteditable data-ph="effect…"></span></div>
+    </div>
+  </div>
+
+  <!-- ============ LITTLE SOLDIER — BLANK (back) ============ -->
+  <div class="card green back">
+    <div class="corner-color"></div>
+    <div class="topband">
+      <div class="stats">
+        <div class="badge def"><span contenteditable data-ph="?"></span><small>Def</small></div>
+        <div class="badge tough"><span contenteditable data-ph="?"></span><small>Tough</small></div>
+      </div>
+      <div class="rank"><div class="chev">⌃⌃</div>Super&nbsp;Soldiers</div>
+      <div class="type">Little Soldier</div>
+    </div>
+    <div class="art">figurine / art</div>
+    <div class="name" contenteditable data-ph="NAME"></div>
+    <div class="actions">
+      <div class="act ability"><span class="tag">⚡ Ability</span>
+        <span class="body" contenteditable data-ph="per Lightning…"></span></div>
+      <div class="act ability"><span class="tag">Move</span>
+        <span class="body">Each Move may remove 1 ♥ from this card.</span></div>
+    </div>
+  </div>
+
+  <!-- ============ GENERAL — BLANK ============ -->
+  <div class="card general front">
+    <div class="corner-color"></div>
+    <div class="topband">
+      <div class="label">General · <span contenteditable data-ph="green/yellow">color</span></div>
+      <div class="type">General</div>
+    </div>
+    <div class="art">General art</div>
+    <div class="name" contenteditable data-ph="NAME"></div>
+    <div class="actions">
+      <div class="act special"><span class="tag">Giving an Order</span>
+        <span class="body" contenteditable>Play 1 Order token on one of your Little Soldiers currently in play.</span></div>
+    </div>
+    <div class="label" style="margin-top:auto">No Defense / Toughness · cannot be attacked</div>
+  </div>
+
+  <!-- ============ THREAT — BLANK ============ -->
+  <div class="card threat front">
+    <div class="corner-color"></div>
+    <div class="topband">
+      <div class="stats">
+        <div class="badge def"><span contenteditable data-ph="?"></span><small>Def</small></div>
+        <div class="badge tough"><span contenteditable data-ph="?"></span><small>Tough</small></div>
+      </div>
+      <div class="type">Threat</div>
+    </div>
+    <div class="art">Threat art · ⊙ Target point</div>
+    <div class="name" contenteditable data-ph="NAME"></div>
+    <div class="actions">
+      <div class="act"><span class="tag">Attack</span>
+        <span class="body" contenteditable data-ph="place X on valid targets / Y on all">…</span></div>
+      <div class="act superability"><span class="tag">⚡⚡⚡ Super</span>
+        <span class="body" contenteditable data-ph="on 3+ Lightning…"></span></div>
+      <div class="act"><span class="tag">Force Field</span>
+        <span class="body" contenteditable data-ph="switch #…">off when Switch # is down</span></div>
+    </div>
+  </div>
+
+  <!-- ============ TACTICS CARD — BLANK (Advanced Tactics module) ============ -->
+  <div class="card tactics front">
+    <div class="corner-color"></div>
+    <div class="topband">
+      <div class="cost" contenteditable data-ph="#" title="Order tokens required (a condition, NOT spent)"></div>
+      <div class="ctype" contenteditable data-ph="general / soldier / reaction">type</div>
+      <div class="type">Tactics</div>
+    </div>
+    <div class="name" contenteditable data-ph="CARD NAME"></div>
+    <div class="effect" contenteditable data-ph="effect text — overrides the rules. For a Reaction, start with “Play this card when…”"></div>
+    <div class="label" style="margin-top:auto">Cost # = Order tokens the General/Soldier must HAVE (not spent) · max 3 cards/turn, 3 in play</div>
+  </div>
+
+  <!-- ============ OBJECT CARD — BLANK (Objects module) ============ -->
+  <div class="card object front">
+    <div class="corner-color"></div>
+    <div class="topband">
+      <div class="ctype">Object</div>
+      <div class="type">Scenery power</div>
+    </div>
+    <div class="name" contenteditable data-ph="OBJECT NAME"></div>
+    <div class="effect" contenteditable data-ph="power triggered when YOUR Little Soldier ends a Move in contact (no opponent also touching)"></div>
+    <div class="label" style="margin-top:auto">Activates at end of a Move on contact · contested if an opponent is also touching it</div>
+  </div>
+
+</div>
+
+<div class="legend noprint">
+  <p><b>Legend.</b>
+  <b>Def</b> (🛡, navy) — a wound lands only when hits&nbsp;&gt;&nbsp;Def; each Shield/Scout
+  token = −1 (min 0). <b>Tough</b> (♥, red) — breaks when Hearts on the card ≥ Tough.
+  <b>Rank</b> — single chevron ⌃ = New Recruit (front), double ⌃⌃ = Super Soldiers (back).
+  <b>Actions</b> — every Little Soldier has Attack + Move + one Special Action; the green tag is
+  the unit's signature. <b>⚡ Ability</b> on the back activates once per Lightning rolled
+  (linear); the Move heal is universal. The 3+⚡ tier exists only on <b>Threats</b>.
+  <b>Tactics</b> (purple) and <b>Objects</b> (teal) come from the Modules book.</p>
+  <p>Build a sheet's data in <code>../schema/soldier-sheet.schema.json</code>, validate with
+  <code>../tools/validate.py</code>, then transcribe onto a card here.</p>
+</div>
+
+</body>
+</html>

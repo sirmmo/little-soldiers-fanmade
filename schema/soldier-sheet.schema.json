@@ -1,0 +1,240 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openfantasymaps.dev/little-soldiers/soldier-sheet.schema.json",
+  "title": "Little Soldiers — Sheet",
+  "description": "A generalized sheet for the Little Soldiers game. One of five kinds: little_soldier, general, threat, tactics_card, object. See FRAMEWORK.md for the rules grammar. v1.2 adds optional figureCandidates (collection figures, e.g. Mage Knight, that can stand in for a role).",
+  "type": "object",
+  "required": ["schemaVersion", "kind", "name"],
+  "properties": {
+    "schemaVersion": { "const": "1.2" },
+    "kind": { "enum": ["little_soldier", "general", "threat", "tactics_card", "object"] },
+    "name": { "type": "string", "minLength": 1 },
+    "flavor": { "type": "string" },
+    "confidence": {
+      "enum": ["confirmed", "inferred", "card-scan", "homebrew"],
+      "default": "homebrew",
+      "description": "Provenance of this sheet's data (mirrors FRAMEWORK.md tags)."
+    }
+  },
+  "allOf": [
+    { "if": { "properties": { "kind": { "const": "little_soldier" } } }, "then": { "$ref": "#/$defs/littleSoldier" } },
+    { "if": { "properties": { "kind": { "const": "general" } } },       "then": { "$ref": "#/$defs/general" } },
+    { "if": { "properties": { "kind": { "const": "threat" } } },        "then": { "$ref": "#/$defs/threat" } },
+    { "if": { "properties": { "kind": { "const": "tactics_card" } } },  "then": { "$ref": "#/$defs/tacticsCard" } },
+    { "if": { "properties": { "kind": { "const": "object" } } },        "then": { "$ref": "#/$defs/object" } }
+  ],
+
+  "$defs": {
+
+    "range": {
+      "enum": ["green", "yellow", "red", "any"],
+      "description": "Cord-measured. green = shortest (1 Move token); yellow = medium/standard move & grenade AoE; red = long (grants the extra attack reroll); any = no range limit (line-of-sight only)."
+    },
+
+    "targetClass": {
+      "enum": ["enemies", "allies", "all", "self"],
+      "description": "'all' = friendly fire included (the AoE premium)."
+    },
+
+    "tokenType": {
+      "enum": ["heart", "shield", "scout", "order", "bonus_order", "ouch", "candy", "supplies", "level", "crate"],
+      "description": "Named tokens from the Book 3 glossary + module tokens."
+    },
+
+    "stats": {
+      "type": "object",
+      "required": ["defense", "toughness"],
+      "properties": {
+        "defense": { "type": "integer", "minimum": 0, "description": "Wound lands only when hits > defense. Units 2-3; Threats up to ~5." },
+        "toughness": { "type": "integer", "minimum": 1, "description": "Breaks when Hearts on the card >= toughness. Units 3-6." }
+      },
+      "additionalProperties": false
+    },
+
+    "figureCandidate": {
+      "type": "object",
+      "description": "A physical miniature from a collection (e.g. the Mage Knight database) that can stand in for this role, so players can field roles from figures they own. See tools/match-collection.py.",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "description": "Figure name as it appears in the source database (e.g. 'Utem Crossbowman')." },
+        "faction": { "type": "string", "description": "Source faction (e.g. Atlantis Guild, Necropolis Sect, Elemental League, Orc Raiders, Black Powder Rebels)." },
+        "set": { "type": "string", "description": "Expansion / set the figure belongs to (e.g. 'Rebellion', 'Lancers')." },
+        "rarity": { "type": "string", "description": "Rarity or rank as the source labels it (free text; Mage Knight used rarity levels and Weak/Standard/Tough ranks)." },
+        "points": { "type": "integer", "minimum": 0, "description": "Point value, if known." },
+        "collectorNumber": { "type": "string", "description": "Collector / figure number within the set, if known." },
+        "dbUrl": { "type": "string", "description": "Link to the figure's page in the source database." },
+        "roleFit": { "type": "string", "description": "Why this figure suits this role (which traits matched). Role assignment may be editorial." },
+        "verified": { "type": "boolean", "default": false, "description": "true once the figure's identity (name, set, collector number) is confirmed against a source listing; faction/points may still be approximate." }
+      },
+      "additionalProperties": false
+    },
+
+    "effect": {
+      "type": "object",
+      "description": "One primitive of an action / ability / tactics card / object power. See FRAMEWORK.md 5.4.",
+      "required": ["kind"],
+      "properties": {
+        "kind": {
+          "enum": [
+            "place_tokens", "transfer_token", "augment_attack", "dice_launch", "catapult_launch",
+            "area_effect", "multi_target", "extra_attacks", "extra_move", "straight_line_move",
+            "swap_positions", "teleport", "self_heal", "self_risk", "ignore_los",
+            "modify_rerolls", "cancel_action", "draw_cards", "grant_order", "custom"
+          ]
+        },
+        "count": { "type": "integer", "description": "How many tokens/targets/dice/attacks/moves/cards. May be negative for modify_rerolls (e.g. -1)." },
+        "token": { "$ref": "#/$defs/tokenType" },
+        "die": { "enum": ["attack", "sniper", "grenade", "mortar", "custom"] },
+        "range": { "$ref": "#/$defs/range" },
+        "targets": { "$ref": "#/$defs/targetClass" },
+        "needsValidTarget": { "type": "boolean", "description": "false = ignores line of sight (the grenade/mortar premium)." },
+        "trigger": { "type": "string", "description": "When this fires: e.g. 'per_lightning', 'on_move', 'reaction:<moment>'." },
+        "text": { "type": "string", "description": "Required for kind=custom; otherwise a human-readable restatement." }
+      },
+      "allOf": [ { "if": { "properties": { "kind": { "const": "custom" } } }, "then": { "required": ["text"] } } ],
+      "additionalProperties": false
+    },
+
+    "action": {
+      "type": "object",
+      "required": ["name", "effects"],
+      "properties": {
+        "name": { "type": "string" },
+        "summary": { "type": "string", "description": "One-line rules text as printed." },
+        "effects": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/effect" } }
+      },
+      "additionalProperties": false
+    },
+
+    "superSoldiers": {
+      "type": "object",
+      "description": "The Super Soldiers (back) rank. Confirmed model (Book 2 p3): ONE per-Lightning Special Ability (linear: N Lightning = N activations) + a universal Move heal. There is NO 3+Lightning 'super special' for Little Soldiers (that tier is Threat-only).",
+      "properties": {
+        "specialAbility": {
+          "type": "object",
+          "required": ["trigger"],
+          "properties": {
+            "trigger": { "const": "per_lightning" },
+            "summary": { "type": "string" },
+            "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } }
+          },
+          "additionalProperties": false
+        },
+        "moveHeal": {
+          "type": "boolean",
+          "default": true,
+          "description": "Universal: each Move a Super Soldier makes may remove 1 Heart from its card."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "littleSoldier": {
+      "type": "object",
+      "required": ["stats", "specialAction"],
+      "properties": {
+        "schemaVersion": true, "kind": true, "name": true, "flavor": true, "confidence": true,
+        "color": { "enum": ["green", "yellow", "any"] },
+        "stats": { "$ref": "#/$defs/stats" },
+        "baseActions": { "type": "array", "items": { "enum": ["attack", "move"] }, "default": ["attack", "move"] },
+        "specialAction": { "$ref": "#/$defs/action" },
+        "superSoldiers": { "$ref": "#/$defs/superSoldiers" },
+        "figurine": { "type": "string" },
+        "figureCandidates": {
+          "type": "array",
+          "description": "Collection figures (e.g. Mage Knight) that can physically stand in for this role, so players can field it from what they own.",
+          "items": { "$ref": "#/$defs/figureCandidate" }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "general": {
+      "type": "object",
+      "required": ["color", "orderAction"],
+      "properties": {
+        "schemaVersion": true, "kind": true, "name": true, "flavor": true, "confidence": true,
+        "color": { "enum": ["green", "yellow", "any"] },
+        "orderAction": { "$ref": "#/$defs/action", "description": "Base: 'Play 1 Order token on one of your Little Soldiers currently in play.'" },
+        "signatureTactics": {
+          "type": "array",
+          "description": "Advanced Tactics module: the 3 Tactics cards printed on the General's back; the unit's only point of asymmetry.",
+          "items": { "type": "string" }
+        },
+        "figureCandidates": {
+          "type": "array",
+          "description": "Collection figures that can physically stand in for this commander/hero.",
+          "items": { "$ref": "#/$defs/figureCandidate" }
+        },
+        "art": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+
+    "threat": {
+      "type": "object",
+      "required": ["stats", "attack", "target"],
+      "properties": {
+        "schemaVersion": true, "kind": true, "name": true, "flavor": true, "confidence": true,
+        "stats": { "$ref": "#/$defs/stats" },
+        "target": { "type": "string", "description": "The Target point used for line-of-sight and range to this Threat." },
+        "attack": { "$ref": "#/$defs/action", "description": "Auto-attack every Threats' turn; +1 Heart to each valid target per Lightning." },
+        "superSpecialAbility": {
+          "type": "object",
+          "description": "Threat-only tier: fires on 3+ Lightning in the collective attack.",
+          "properties": {
+            "trigger": { "const": "three_plus_lightning" },
+            "summary": { "type": "string" },
+            "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } }
+          },
+          "additionalProperties": false
+        },
+        "forceField": {
+          "type": "object",
+          "properties": {
+            "switchNumbers": { "type": "array", "items": { "type": "integer", "minimum": 1 } },
+            "requiresAllSwitches": { "type": "boolean", "default": false }
+          },
+          "additionalProperties": false
+        },
+        "figureCandidates": {
+          "type": "array",
+          "description": "Collection figures that can physically stand in for this Threat/boss.",
+          "items": { "$ref": "#/$defs/figureCandidate" }
+        },
+        "parts": { "type": "array", "items": { "$ref": "#/$defs/threat" } }
+      },
+      "additionalProperties": false
+    },
+
+    "tacticsCard": {
+      "type": "object",
+      "description": "Advanced Tactics module. orderCondition gates the card (NOT a spent cost). type Reaction is played on an opponent's turn.",
+      "required": ["cardType", "effects"],
+      "properties": {
+        "schemaVersion": true, "kind": true, "name": true, "flavor": true, "confidence": true,
+        "cardType": { "enum": ["general", "soldier", "reaction"] },
+        "orderCondition": { "type": "integer", "minimum": 0, "description": "Order tokens the General/Soldier must HAVE to play it (top-left number). Omit/0 = no condition (e.g. Fighting Fit)." },
+        "owner": { "type": "string", "description": "Signature card's General (icon), if any." },
+        "reactionTrigger": { "type": "string", "description": "Required when cardType=reaction: the moment it may be played." },
+        "summary": { "type": "string" },
+        "effects": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/effect" } }
+      },
+      "allOf": [ { "if": { "properties": { "cardType": { "const": "reaction" } } }, "then": { "required": ["reactionTrigger"] } } ],
+      "additionalProperties": false
+    },
+
+    "object": {
+      "type": "object",
+      "description": "Objects module. Activated when YOUR Little Soldier ends a Move in contact and no opponent is also touching it.",
+      "required": ["effects"],
+      "properties": {
+        "schemaVersion": true, "kind": true, "name": true, "flavor": true, "confidence": true,
+        "twoSided": { "type": "boolean", "default": false, "description": "true for the Switch (flip-state token)." },
+        "summary": { "type": "string" },
+        "effects": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/effect" } }
+      },
+      "additionalProperties": false
+    }
+  }
+}

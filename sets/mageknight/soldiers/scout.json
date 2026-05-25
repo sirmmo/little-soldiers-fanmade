@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "little_soldier",
+  "name": "Scout",
+  "confidence": "homebrew",
+  "flavor": "Magestone (Mage Knight) — ranges ahead and marks the enemy for the host. Reskin of the Infantry. figureCandidates are confirmed Mage Knight: Resurrection figures (the commonly available set; minisgallery.com/index.php?id=mage-knight-resurrection) — collector numbers and rarities are accurate; role assignment is editorial (by figure name).",
+  "color": "any",
+  "stats": { "defense": 2, "toughness": 5 },
+  "baseActions": ["attack", "move"],
+  "specialAction": {
+    "name": "Reconnoiter",
+    "summary": "Place up to 2 Hex tokens on enemy Units. They do not need to be valid targets. Each Hex weakens that Unit's Armor.",
+    "effects": [
+      { "kind": "place_tokens", "count": 2, "token": "scout", "targets": "enemies", "range": "any", "needsValidTarget": false }
+    ]
+  },
+  "superSoldiers": {
+    "specialAbility": {
+      "trigger": "per_lightning",
+      "summary": "For each Lightning, make 1 Move after this Attack.",
+      "effects": [ { "kind": "extra_move", "count": 1, "trigger": "per_lightning" } ]
+    },
+    "moveHeal": true
+  },
+  "figureCandidates": [
+    { "name": "Attem Sentinel", "set": "Resurrection", "rarity": "Common", "collectorNumber": "5", "roleFit": "Rank-and-file guardsman — the basic line/skirmisher the Scout stands for.", "verified": true },
+    { "name": "Skeleton Skullwalker", "set": "Resurrection", "rarity": "Common", "collectorNumber": "3", "roleFit": "Cheap expendable foot.", "verified": true },
+    { "name": "Zombie Shambler", "set": "Resurrection", "rarity": "Common", "collectorNumber": "7", "roleFit": "Cheap body to screen and advance.", "verified": true },
+    { "name": "Goblin Pillager", "set": "Resurrection", "rarity": "Common", "collectorNumber": "6", "roleFit": "Light raider/skirmisher.", "verified": true },
+    { "name": "Gassalite Swordbrother", "set": "Resurrection", "rarity": "Common", "collectorNumber": "8", "roleFit": "Sword infantry for the line.", "verified": true }
+  ]
+}

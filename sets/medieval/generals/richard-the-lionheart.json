@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "general",
+  "name": "Richard the Lionheart",
+  "confidence": "homebrew",
+  "flavor": "Realms at War — legendary commander reprising Richard I of England, hero of the Third Crusade. A warrior-king who led from the front; at Arsuf he held a disciplined line under harassment, then loosed a decisive heavy charge. His Stratagems reward aggression backed by iron discipline.",
+  "color": "green",
+  "orderAction": {
+    "name": "Command",
+    "summary": "Play 1 Command token on one of your Warriors currently in play.",
+    "effects": [
+      {
+        "kind": "place_tokens",
+        "count": 1,
+        "token": "order",
+        "targets": "allies",
+        "range": "any",
+        "needsValidTarget": false
+      }
+    ]
+  },
+  "signatureTactics": [
+    "Charge at Arsuf",
+    "Lionheart's Valour",
+    "Hold the Line"
+  ]
+}

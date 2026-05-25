@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "Deep Operation",
+  "confidence": "homebrew",
+  "flavor": "Combined Arms Doctrine — Zhukov's deep-battle doctrine: strike the enemy in depth, all along the front, at once.",
+  "cardType": "general",
+  "orderCondition": 3,
+  "owner": "Georgy Zhukov",
+  "summary": "Up to 3 different allied units each make 1 Attack.",
+  "effects": [
+    {
+      "kind": "extra_attacks",
+      "count": 3,
+      "targets": "enemies",
+      "needsValidTarget": true,
+      "text": "Spread across up to 3 different allied units: each makes 1 Attack."
+    }
+  ]
+}

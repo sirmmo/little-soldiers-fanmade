@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "tactics_card",
+  "name": "El Alamein Set-Piece",
+  "confidence": "homebrew",
+  "flavor": "Combined Arms Doctrine — Montgomery's meticulously prepared battle: massed, registered firepower brought down all at once.",
+  "cardType": "general",
+  "orderCondition": 3,
+  "owner": "Bernard Montgomery",
+  "summary": "Until the end of your turn, every Attack your units make gains +1 reroll.",
+  "effects": [
+    {
+      "kind": "modify_rerolls",
+      "count": 1,
+      "targets": "allies",
+      "text": "All of your Attacks this turn gain +1 reroll (the prepared bombardment)."
+    }
+  ]
+}

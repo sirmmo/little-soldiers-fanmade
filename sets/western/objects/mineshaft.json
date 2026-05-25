@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.2",
+  "kind": "object",
+  "name": "Mineshaft",
+  "confidence": "homebrew",
+  "flavor": "High Noon — abandoned mine tunnels riddle the Territory. Reskin of the Teleporter.",
+  "twoSided": false,
+  "summary": "Activate at the end of a Move in contact (no enemy also touching): place your Hand in contact with any other Mineshaft in play. This immediately ends your Move. Dynamite or a Cannon Blast touching a Mineshaft may be sent through just before it goes off.",
+  "effects": [
+    {
+      "kind": "teleport",
+      "targets": "self",
+      "text": "Relocate to any other Mineshaft in play; ends the Move."
+    }
+  ]
+}
