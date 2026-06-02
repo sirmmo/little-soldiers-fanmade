@@ -89,6 +89,7 @@ figure candidates as the worked example.
 | Unit | Def | Tough | Special Action | Super Soldiers — Special Ability (per ⚡) |
 |------|-----|-------|----------------|-------------------------------------------|
 | **Infantry** | 2 | 5 | **Scout** — place up to 2 Scout tokens on opponents (−def), no valid target | **Make 1 Move after this Attack** |
+<!-- Infantry row also verified against physical-card photos of the Italian edition (FANTERIA), both rank sides, in `originals/`. -->
 | **Sniper** | 3 | 3 | **Risky Shot** — Attack adding the Sniper die (⊕ adds hits; Boom adds ♥ to self) | **Place 1 Shield on the target after this Attack** (lowers its defense) |
 | **Grenadier** | *[card-scan]* | 6 | **Throw a Grenade** — flick the Grenade die; AoE in yellow range to all; Boom = 7 to self | **Apply this Attack's hits to another valid target** (multi-target) |
 | **Operator** | *[card-scan]* | 5 | **Mortar Shot** — catapult; AoE to allies + enemies; ♥ = mortar token face | **Transfer 1 ♥ from one Little Soldier to any other in play** (incl. opponents) |

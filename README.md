@@ -140,3 +140,11 @@ identification and compatibility:
 
 No copyright is claimed over any third party's marks. The original framework code, schema,
 tooling and homebrew content in this directory are provided as-is for personal use.
+
+### ⚠️ Before flipping this repo public
+
+If any user-supplied **card photos** are present under `originals/`, they depict physical
+IELLO cards and are © IELLO. While the repository is **private** they can stay there for the
+owner's personal verification, but they must be **removed before going public** — distributing
+the card art/layout would directly contradict the rest of this project's stance of reproducing
+no rulebook or component art. See `originals/README.md`.

@@ -3,6 +3,7 @@
   "kind": "little_soldier",
   "name": "Infantry",
   "confidence": "confirmed",
+  "flavor": "Italian-edition card name: FANTERIA. Both rank sides are verified against physical-card photos in originals/ (photo_2026-06-02_09-56-47.jpg = New Recruit, photo_2026-06-02_09-56-52.jpg = Super Soldiers): Def 2 / Tough 5; special action RICOGNIZIONE ('Posiziona fino a 2 sugli avversari' = place up to 2 Scout tokens on opponents); Super Soldiers per-⚡ ability 'Effettua 1 Movimento dopo questo Attacco' (make 1 Move after this Attack); MOVE-side universal heal 'Rimuovi 1 ♥ da questo Soldatino' (remove 1 Heart from this Little Soldier).",
   "color": "any",
   "stats": {
     "defense": 2,
