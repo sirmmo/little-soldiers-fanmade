@@ -2,101 +2,181 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Little Soldiers — Printable Sheet Template</title>
+<title>Little Soldiers — Sheet Template</title>
 <style>
-  /* ----------------------------------------------------------------------
-     Little Soldiers — fill-in-the-blanks card template.
-     Print: A4, portrait. Each card is 65 x 90 mm (fits standard sleeves).
-     Type directly into the cards (they are contenteditable) or print blank
-     and write by hand. Slot positions mirror the real card anatomy
-     (FRAMEWORK.md §2-4).
-     ---------------------------------------------------------------------- */
+  /* =====================================================================
+     Little Soldiers — Sheet Template
+     A printable, fill-in template AND a JSON renderer. Load a sheet JSON
+     (from examples/ or sets/) and it renders to a card. Print: A4 portrait.
+     Each card is 65 × 90 mm — fits standard board-game sleeves.
+     Slot positions match the real card anatomy verified against the
+     Italian-edition Infantry (FANTERIA) photos in ../originals/.
+     ===================================================================== */
   :root{
-    --ink:#1f2933; --muted:#7b8794; --line:#cbd2d9;
-    --green:#2f9e44; --yellow:#f0a500; --red:#c92a2a; --navy:#1c3d5a;
+    --ink:#1f2933; --paper:#fdfdfb; --muted:#7b8794; --line:#cbd2d9;
+    --green:#2f9e44; --green-dk:#1f7a36; --yellow:#f0a500; --yellow-dk:#b87b00;
+    --red:#c92a2a; --red-dk:#8e1d1d; --navy:#1c3d5a; --purple:#7048e8;
+    --teal:#0c8599; --bg:#eef1f4;
     --card-w:65mm; --card-h:90mm;
   }
   *{box-sizing:border-box;}
   body{
     font-family:"Segoe UI",system-ui,Roboto,Helvetica,Arial,sans-serif;
-    color:var(--ink); margin:0; padding:14mm 10mm; background:#eef1f4;
+    color:var(--ink); margin:0; padding:14mm 10mm; background:var(--bg);
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
   }
-  h1{font-size:18pt;margin:0 0 2mm;}
-  .intro{font-size:9pt;color:var(--muted);max-width:180mm;margin:0 0 8mm;line-height:1.4;}
+  h1{font-size:18pt;margin:0 0 1mm;letter-spacing:.3px;}
+  h2{font-size:11pt;margin:8mm 0 3mm;letter-spacing:.3px;color:var(--muted);text-transform:uppercase;font-weight:700;}
+  .intro{font-size:9pt;color:var(--muted);max-width:200mm;margin:0 0 6mm;line-height:1.5;}
   .intro code{background:#dfe3e8;padding:0 3px;border-radius:3px;}
 
-  .sheet{display:flex;flex-wrap:wrap;gap:8mm;}
-
-  .card{
-    width:var(--card-w); height:var(--card-h);
-    border:1.4pt solid var(--ink); border-radius:4mm;
-    background:#fff; padding:3mm; display:flex; flex-direction:column;
-    position:relative; overflow:hidden; page-break-inside:avoid;
+  /* ---------- the loader UI ---------- */
+  .loader{
+    border:1pt dashed var(--line); background:#fff; border-radius:3mm;
+    padding:3mm 4mm; margin:0 0 5mm; max-width:200mm; font-size:9pt;
+    display:flex; flex-wrap:wrap; gap:3mm; align-items:center;
   }
-  .card .corner-color{position:absolute;inset:0 0 auto 0;height:3mm;}
-  .card.green  .corner-color{background:var(--green);}
-  .card.yellow .corner-color{background:var(--yellow);}
-  .card.threat .corner-color{background:var(--red);}
-  .card.general .corner-color{background:var(--navy);}
+  .loader label{cursor:pointer;}
+  .loader input[type=file]{font-size:9pt;}
+  .loader button{
+    font-size:9pt; padding:1mm 3mm; border:1pt solid var(--ink); background:#fff;
+    border-radius:2mm; cursor:pointer;
+  }
+  .loader button.primary{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .loader .info{color:var(--muted);font-size:8.5pt;}
+  details summary{cursor:pointer; color:var(--muted); font-size:8.5pt;}
+  details textarea{
+    width:100%; min-height:30mm; font:9pt ui-monospace,Menlo,Consolas,monospace;
+    border:1pt solid var(--line); border-radius:2mm; padding:2mm; margin-top:2mm;
+  }
 
-  /* ---- top band: stats + rank + type ---- */
-  .topband{display:flex;align-items:flex-start;justify-content:space-between;margin-top:2mm;}
-  .stats{display:flex;gap:2mm;}
-  .badge{width:9mm;height:9mm;display:flex;flex-direction:column;align-items:center;
-          justify-content:center;border-radius:50%;border:1.2pt solid var(--ink);
-          font-weight:700;font-size:11pt;line-height:1;}
-  .badge small{font-size:4pt;font-weight:600;color:var(--muted);text-transform:uppercase;}
-  .badge.def{background:#e3ecf5;border-color:var(--navy);}
-  .badge.tough{background:#fde7e7;border-color:var(--red);}
-  .rank{font-size:7pt;color:var(--muted);text-align:center;}
-  .rank .chev{font-size:13pt;line-height:1;color:var(--ink);}
-  .type{font-size:6.5pt;color:var(--muted);border:1pt dashed var(--line);
-        border-radius:3px;padding:1mm 1.5mm;text-align:center;max-width:18mm;}
+  /* ---------- the card itself ---------- */
+  .sheet{display:flex;flex-wrap:wrap;gap:6mm; align-items:flex-start;}
+  .card{
+    width:var(--card-w); min-height:var(--card-h);
+    background:var(--paper); padding:3mm; display:flex; flex-direction:column;
+    position:relative; overflow:hidden; page-break-inside:avoid;
+    border:1.4pt solid var(--ink); border-radius:4mm;
+    box-shadow:0 1px 4px rgba(0,0,0,.06);
+  }
+  /* coloured top stripe (squad colour / sheet kind) */
+  .card .stripe{position:absolute;inset:0 0 auto 0;height:3mm;}
+  .card.green   .stripe{background:var(--green);}
+  .card.yellow  .stripe{background:var(--yellow);}
+  .card.threat  .stripe{background:var(--red);}
+  .card.general .stripe{background:var(--navy);}
+  .card.tactics .stripe{background:var(--purple);}
+  .card.object  .stripe{background:var(--teal);}
+  /* back (Super Soldiers) gets a faint warm wash */
+  .card.back{background:linear-gradient(180deg,#fffbe9 0,var(--paper) 30%);}
+
+  /* ---- top band: stats · rank · type ---- */
+  .topband{display:flex;align-items:center;justify-content:space-between;
+           margin-top:2mm;gap:2mm;}
+  .stats{display:flex;gap:1.5mm;}
+  .badge{width:9mm;height:9mm;display:flex;align-items:center;justify-content:center;
+         border-radius:50%;border:1.6pt solid var(--ink);
+         font-weight:800;font-size:11pt;line-height:1;background:#fff;}
+  .badge.def{background:#dfeaf4;border-color:var(--navy);color:var(--navy);}
+  .badge.tough{background:#fde0e0;border-color:var(--red);color:var(--red);}
+  .rank{font-size:6.5pt;color:var(--muted);text-align:center;line-height:1;
+        text-transform:uppercase;letter-spacing:.4px;}
+  .rank .chev{font-size:14pt;line-height:1;color:var(--ink);display:block;}
+  .type{font-size:6pt;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;
+        border:1pt dashed var(--line);border-radius:2px;padding:1mm 1.5mm;text-align:center;}
 
   /* ---- art / figurine area ---- */
   .art{flex:1;margin:2mm 0;border:1pt dashed var(--line);border-radius:3mm;
        display:flex;align-items:center;justify-content:center;color:var(--line);
-       font-size:7pt;letter-spacing:.5px;text-transform:uppercase;}
+       font-size:7pt;letter-spacing:.6px;text-transform:uppercase;min-height:22mm;
+       background:repeating-linear-gradient(45deg,#fafbfc 0 4mm,#f3f5f7 4mm 8mm);}
 
-  /* ---- name banner ---- */
-  .name{font-weight:800;font-size:13pt;text-transform:uppercase;letter-spacing:.5px;
-        padding:1mm 2mm;border-radius:2mm;background:#f1f3f5;border:1pt solid var(--line);
-        min-height:7mm;}
+  /* ---- striped name banner (matches the Italian card) ---- */
+  .name{
+    position:relative; font-weight:900; font-size:13.5pt; text-align:center;
+    text-transform:uppercase; letter-spacing:1.5px; color:#fff;
+    padding:2mm 3mm; margin:1mm -1mm; line-height:1;
+    background: repeating-linear-gradient(135deg,
+      #fff 0 1.4mm, var(--red) 1.4mm 4mm);
+    border-top:1pt solid var(--ink); border-bottom:1pt solid var(--ink);
+    text-shadow: 0.5pt 0.5pt 0 var(--red-dk), -0.5pt -0.5pt 0 var(--red-dk),
+                 0.5pt -0.5pt 0 var(--red-dk), -0.5pt 0.5pt 0 var(--red-dk);
+  }
 
-  /* ---- actions band ---- */
-  .actions{margin-top:2mm;display:flex;flex-direction:column;gap:1mm;}
-  .act{display:flex;gap:1.5mm;font-size:7.5pt;align-items:baseline;}
-  .act .tag{font-weight:700;text-transform:uppercase;font-size:6.5pt;
-            background:var(--ink);color:#fff;border-radius:2px;padding:.3mm 1.2mm;flex:none;}
-  .act .body{flex:1;border-bottom:1pt dotted var(--line);min-height:4mm;}
-  .special .tag{background:var(--green);}
-  .ability .tag{background:var(--yellow);color:var(--ink);}
-  .superability .tag{background:var(--red);}
+  /* ---- 3-column action band at the bottom ---- */
+  .actions{
+    display:grid; grid-template-columns: 1fr 1fr 1.55fr; gap:1mm;
+    margin-top:2mm; min-height:16mm;
+  }
+  .act{
+    border:0.8pt solid var(--line); border-radius:2mm; padding:1.4mm 1.8mm;
+    display:flex; flex-direction:column; gap:.8mm; background:#fff;
+  }
+  .act .tag{font-weight:800; font-size:6.2pt; color:var(--muted);
+            text-transform:uppercase; letter-spacing:.5px; display:flex;
+            align-items:center; gap:1mm;}
+  .act .tag .icon{font-size:8pt;line-height:1;}
+  .act .body{font-size:7pt; line-height:1.25; flex:1;}
+  .act.special{background:#f1fbf4; border-color:var(--green);}
+  .act.special .tag{color:var(--green-dk);}
+  .act.ability{background:#fff8e1; border-color:var(--yellow-dk);}
+  .act.ability .tag{color:var(--yellow-dk);}
+  .act.superability{background:#fff0f0; border-color:var(--red);}
+  .act.superability .tag{color:var(--red-dk);}
+  .act.move{background:#f4f7fb;}
+  .act.attack{background:#f9f9fa;}
 
-  /* the back (Super Soldiers) side */
-  .card.back .name{background:#fff4d6;}
-  .pending{font-size:6pt;color:var(--red);font-style:italic;}
+  /* ---- Tactics + Object cards ---- */
+  .card.tactics .name, .card.object .name{
+    background: repeating-linear-gradient(135deg,
+      #fff 0 1.4mm, var(--purple) 1.4mm 4mm);
+    text-shadow: 0.5pt 0.5pt 0 #4d2faa, -0.5pt -0.5pt 0 #4d2faa,
+                 0.5pt -0.5pt 0 #4d2faa, -0.5pt 0.5pt 0 #4d2faa;
+  }
+  .card.object .name{
+    background: repeating-linear-gradient(135deg,
+      #fff 0 1.4mm, var(--teal) 1.4mm 4mm);
+    text-shadow: 0.5pt 0.5pt 0 #075560, -0.5pt -0.5pt 0 #075560,
+                 0.5pt -0.5pt 0 #075560, -0.5pt 0.5pt 0 #075560;
+  }
+  .cost{width:8mm;height:8mm;border-radius:2mm;border:1.6pt solid var(--purple);
+        background:#efe7fd;color:var(--purple); font-weight:900;font-size:11pt;
+        display:flex;align-items:center;justify-content:center;}
+  .ctype{font-size:6.5pt;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;}
+  .effect{flex:1; font-size:8pt; line-height:1.35; border:0.8pt solid var(--line);
+          border-radius:2mm; padding:2mm; margin-top:1mm; background:#fff;}
+  .meta{font-size:7pt;color:var(--muted); margin-top:1mm;line-height:1.3;}
 
-  /* Tactics card + Object card (Modules book) */
-  .card.tactics .corner-color{background:#7048e8;}
-  .card.object  .corner-color{background:#0c8599;}
-  .cost{width:8mm;height:8mm;border-radius:2mm;border:1.4pt solid #7048e8;background:#efe7fd;
-        display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11pt;}
-  .ctype{font-size:6.5pt;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;}
-  .effect{flex:1;font-size:8pt;border:1pt dashed var(--line);border-radius:2mm;padding:2mm;margin-top:2mm;}
+  /* ---- figureCandidates panel below soldier cards ---- */
+  .fc{
+    font-size:7pt; color:var(--ink); width:var(--card-w);
+    margin-top:-3mm; padding:1.5mm 2.5mm 2mm;
+    background:#fff; border:1pt dashed var(--line); border-top:none;
+    border-radius:0 0 3mm 3mm; line-height:1.35;
+  }
+  .fc h4{margin:0 0 1mm; font-size:7pt; text-transform:uppercase;
+          letter-spacing:.5px; color:var(--muted); font-weight:800;}
+  .fc ul{margin:0; padding:0; list-style:none;}
+  .fc li{padding:.3mm 0; display:flex; gap:1.2mm;}
+  .fc li .num{color:var(--muted); min-width:6mm;}
+  .fc li .nm{font-weight:600;}
+  .fc li .fac{color:var(--muted); font-style:italic;}
 
-  .label{font-size:6pt;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;}
-
+  /* ---- small bits ---- */
+  .label{font-size:6pt;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+  .pending{font-size:6.5pt;color:var(--red);font-style:italic;}
   [contenteditable]{outline:none;}
   [contenteditable]:empty:before{content:attr(data-ph);color:var(--line);}
 
-  .legend{margin-top:8mm;font-size:8pt;color:var(--muted);max-width:180mm;line-height:1.5;}
+  .legend{margin-top:8mm;font-size:8pt;color:var(--muted);max-width:200mm;line-height:1.5;}
   .legend b{color:var(--ink);}
+  .err{color:#b00; font-size:9pt;}
 
+  /* ---- print ---- */
   @media print{
     body{background:#fff;padding:0;}
-    .intro,.legend,.noprint{display:none;}
-    @page{size:A4 portrait;margin:10mm;}
+    .intro,.legend,.loader,.noprint,h2{display:none;}
+    @page{size:A4 portrait;margin:8mm;}
     .card{box-shadow:none;}
   }
 </style>
@@ -105,177 +185,426 @@
 
 <h1>Little Soldiers — Sheet Template</h1>
 <p class="intro noprint">
-  Fill in the cards (click to type) or print blank and write by hand. Slot positions follow
-  the card anatomy in <code>FRAMEWORK.md</code>. Cards are 65×90&nbsp;mm. The <b>back</b> (Super
-  Soldiers) side carries one <b>per-⚡ Special Ability</b> plus the universal <b>Move heal</b>
-  (Little Soldiers have no 3+⚡ tier — that's Threat-only). Tip: <code>Ctrl/Cmd-P</code> to
-  print; enable “Background graphics”.
+  Load sheet JSON files from <code>../examples/</code> or <code>../sets/</code> and they
+  render here as cards (front + Super Soldiers back for units, with their figure-candidates if
+  present). Or scroll down to fill in <b>blank templates</b> by hand. Slot positions follow the
+  real card anatomy verified against the Italian <code>FANTERIA</code> photos in
+  <code>../originals/</code>. <code>Ctrl/Cmd-P</code> to print; enable “Background graphics”.
 </p>
 
+<!-- ============ loader ============ -->
+<div class="loader noprint">
+  <label><b>Load sheets:</b> <input type="file" id="files" multiple accept=".json"></label>
+  <button id="demo" class="primary" type="button">Show Infantry example</button>
+  <button id="clear" type="button">Clear loaded</button>
+  <span class="info" id="info">— pick one or more <code>.json</code> sheets to render —</span>
+  <details style="flex-basis:100%;">
+    <summary>or paste a sheet JSON directly</summary>
+    <textarea id="paste" placeholder='{ "schemaVersion": "1.2", "kind": "little_soldier", "name": "…", … }'></textarea>
+    <button id="renderPaste" type="button">Render pasted JSON</button>
+  </details>
+</div>
+
+<h2 class="noprint">Loaded sheets</h2>
+<div id="loaded" class="sheet"></div>
+
+<h2 class="noprint">Blank templates (hand fill-in)</h2>
 <div class="sheet">
 
-  <!-- ============ LITTLE SOLDIER — FRONT (New Recruit) — EXAMPLE ============ -->
-  <div class="card yellow front">
-    <div class="corner-color"></div>
+  <!-- BLANK: Little Soldier — New Recruit -->
+  <div class="card green">
+    <div class="stripe"></div>
     <div class="topband">
       <div class="stats">
-        <div class="badge def"><span>2</span><small>Def</small></div>
-        <div class="badge tough"><span>5</span><small>Tough</small></div>
+        <div class="badge def" contenteditable data-ph="?"></div>
+        <div class="badge tough" contenteditable data-ph="?"></div>
       </div>
-      <div class="rank"><div class="chev">⌃</div>New&nbsp;Recruit</div>
-      <div class="type">Little Soldier</div>
-    </div>
-    <div class="art">figurine / art</div>
-    <div class="name" contenteditable data-ph="NAME">INFANTRY</div>
-    <div class="actions">
-      <div class="act"><span class="tag">Attack</span><span class="body"></span></div>
-      <div class="act"><span class="tag">Move</span><span class="body"></span></div>
-      <div class="act special"><span class="tag">Scout</span>
-        <span class="body" contenteditable>Place up to 2 Scout tokens on opponents (−def). No valid target.</span></div>
-    </div>
-  </div>
-
-  <!-- ============ LITTLE SOLDIER — BACK (Super Soldiers) — EXAMPLE ============ -->
-  <div class="card yellow back">
-    <div class="corner-color"></div>
-    <div class="topband">
-      <div class="stats">
-        <div class="badge def"><span>2</span><small>Def</small></div>
-        <div class="badge tough"><span>5</span><small>Tough</small></div>
-      </div>
-      <div class="rank"><div class="chev">⌃⌃</div>Super&nbsp;Soldiers</div>
-      <div class="type">Little Soldier</div>
-    </div>
-    <div class="art">figurine / art</div>
-    <div class="name">INFANTRY</div>
-    <div class="actions">
-      <div class="act ability"><span class="tag">⚡ Ability</span>
-        <span class="body">Per ⚡: Make 1 Move after this Attack.</span></div>
-      <div class="act ability"><span class="tag">Move</span>
-        <span class="body">Each Move may remove 1 ♥ from this card.</span></div>
-    </div>
-    <div class="label" style="margin-top:auto">⚡ = each Lightning rolled activates the Special Ability once (linear) · the Move heal is universal to all Super Soldiers</div>
-  </div>
-
-  <!-- ============ LITTLE SOLDIER — BLANK (front) ============ -->
-  <div class="card green front">
-    <div class="corner-color"></div>
-    <div class="topband">
-      <div class="stats">
-        <div class="badge def"><span contenteditable data-ph="?"></span><small>Def</small></div>
-        <div class="badge tough"><span contenteditable data-ph="?"></span><small>Tough</small></div>
-      </div>
-      <div class="rank"><div class="chev">⌃</div>New&nbsp;Recruit</div>
+      <div class="rank"><span class="chev">⌃</span>New Recruit</div>
       <div class="type">Little Soldier</div>
     </div>
     <div class="art">figurine / art</div>
     <div class="name" contenteditable data-ph="NAME"></div>
     <div class="actions">
-      <div class="act"><span class="tag">Attack</span><span class="body"></span></div>
-      <div class="act"><span class="tag">Move</span><span class="body"></span></div>
-      <div class="act special"><span class="tag" contenteditable data-ph="Special">Special</span>
-        <span class="body" contenteditable data-ph="effect…"></span></div>
+      <div class="act attack"><div class="tag"><span class="icon">⚔</span>Attack</div><div class="body"></div></div>
+      <div class="act move"><div class="tag"><span class="icon">👣</span>Move</div><div class="body"></div></div>
+      <div class="act special">
+        <div class="tag"><span class="icon">★</span><span contenteditable data-ph="Special">Special</span></div>
+        <div class="body" contenteditable data-ph="effect text…"></div>
+      </div>
     </div>
   </div>
 
-  <!-- ============ LITTLE SOLDIER — BLANK (back) ============ -->
+  <!-- BLANK: Little Soldier — Super Soldiers -->
   <div class="card green back">
-    <div class="corner-color"></div>
+    <div class="stripe"></div>
     <div class="topband">
       <div class="stats">
-        <div class="badge def"><span contenteditable data-ph="?"></span><small>Def</small></div>
-        <div class="badge tough"><span contenteditable data-ph="?"></span><small>Tough</small></div>
+        <div class="badge def" contenteditable data-ph="?"></div>
+        <div class="badge tough" contenteditable data-ph="?"></div>
       </div>
-      <div class="rank"><div class="chev">⌃⌃</div>Super&nbsp;Soldiers</div>
+      <div class="rank"><span class="chev">⌃⌃</span>Super Soldiers</div>
       <div class="type">Little Soldier</div>
     </div>
     <div class="art">figurine / art</div>
     <div class="name" contenteditable data-ph="NAME"></div>
     <div class="actions">
-      <div class="act ability"><span class="tag">⚡ Ability</span>
-        <span class="body" contenteditable data-ph="per Lightning…"></span></div>
-      <div class="act ability"><span class="tag">Move</span>
-        <span class="body">Each Move may remove 1 ♥ from this card.</span></div>
+      <div class="act ability"><div class="tag"><span class="icon">⚡</span>Per ⚡ Attack</div>
+        <div class="body" contenteditable data-ph="per Lightning ability…"></div></div>
+      <div class="act ability"><div class="tag"><span class="icon">👣</span>Move</div>
+        <div class="body">Remove 1 ♥ from this Little Soldier.</div></div>
+      <div class="act special"><div class="tag"><span class="icon">★</span>Special</div>
+        <div class="body" contenteditable data-ph="same as front…"></div></div>
     </div>
   </div>
 
-  <!-- ============ GENERAL — BLANK ============ -->
-  <div class="card general front">
-    <div class="corner-color"></div>
+  <!-- BLANK: General -->
+  <div class="card general">
+    <div class="stripe"></div>
     <div class="topband">
-      <div class="label">General · <span contenteditable data-ph="green/yellow">color</span></div>
+      <div class="label">General · <span contenteditable data-ph="green / yellow">colour</span></div>
       <div class="type">General</div>
     </div>
     <div class="art">General art</div>
     <div class="name" contenteditable data-ph="NAME"></div>
-    <div class="actions">
-      <div class="act special"><span class="tag">Giving an Order</span>
-        <span class="body" contenteditable>Play 1 Order token on one of your Little Soldiers currently in play.</span></div>
-    </div>
-    <div class="label" style="margin-top:auto">No Defense / Toughness · cannot be attacked</div>
+    <div class="effect" contenteditable>Play 1 Order token on one of your Little Soldiers currently in play.</div>
+    <div class="meta">No Def / Tough · cannot be attacked. Signature Tactics (Advanced Tactics module):
+      <span contenteditable data-ph="card · card · card"></span></div>
   </div>
 
-  <!-- ============ THREAT — BLANK ============ -->
-  <div class="card threat front">
-    <div class="corner-color"></div>
+  <!-- BLANK: Threat -->
+  <div class="card threat">
+    <div class="stripe"></div>
     <div class="topband">
       <div class="stats">
-        <div class="badge def"><span contenteditable data-ph="?"></span><small>Def</small></div>
-        <div class="badge tough"><span contenteditable data-ph="?"></span><small>Tough</small></div>
+        <div class="badge def" contenteditable data-ph="?"></div>
+        <div class="badge tough" contenteditable data-ph="?"></div>
       </div>
       <div class="type">Threat</div>
     </div>
-    <div class="art">Threat art · ⊙ Target point</div>
+    <div class="art">Threat art · ⊙ Target</div>
     <div class="name" contenteditable data-ph="NAME"></div>
-    <div class="actions">
-      <div class="act"><span class="tag">Attack</span>
-        <span class="body" contenteditable data-ph="place X on valid targets / Y on all">…</span></div>
-      <div class="act superability"><span class="tag">⚡⚡⚡ Super</span>
-        <span class="body" contenteditable data-ph="on 3+ Lightning…"></span></div>
-      <div class="act"><span class="tag">Force Field</span>
-        <span class="body" contenteditable data-ph="switch #…">off when Switch # is down</span></div>
+    <div class="actions" style="grid-template-columns:1fr 1fr 1.4fr;">
+      <div class="act"><div class="tag">Attack</div><div class="body" contenteditable data-ph="place X on valid / Y on all"></div></div>
+      <div class="act superability"><div class="tag"><span class="icon">⚡⚡⚡</span>Super</div>
+        <div class="body" contenteditable data-ph="on 3+ Lightning…"></div></div>
+      <div class="act"><div class="tag">Force Field</div><div class="body" contenteditable data-ph="off when Switch # is down"></div></div>
     </div>
   </div>
 
-  <!-- ============ TACTICS CARD — BLANK (Advanced Tactics module) ============ -->
-  <div class="card tactics front">
-    <div class="corner-color"></div>
+  <!-- BLANK: Tactics card -->
+  <div class="card tactics">
+    <div class="stripe"></div>
     <div class="topband">
-      <div class="cost" contenteditable data-ph="#" title="Order tokens required (a condition, NOT spent)"></div>
+      <div class="cost" contenteditable data-ph="#" title="Order tokens the unit must HAVE (a condition, NOT spent)"></div>
       <div class="ctype" contenteditable data-ph="general / soldier / reaction">type</div>
       <div class="type">Tactics</div>
     </div>
     <div class="name" contenteditable data-ph="CARD NAME"></div>
-    <div class="effect" contenteditable data-ph="effect text — overrides the rules. For a Reaction, start with “Play this card when…”"></div>
-    <div class="label" style="margin-top:auto">Cost # = Order tokens the General/Soldier must HAVE (not spent) · max 3 cards/turn, 3 in play</div>
+    <div class="effect" contenteditable data-ph="effect text — overrides the rules. For a Reaction, start: “Play this card when…”"></div>
+    <div class="meta">Cost # = Order tokens the General/Soldier must HAVE (not spent) · max 3 cards/turn, 3 in play</div>
   </div>
 
-  <!-- ============ OBJECT CARD — BLANK (Objects module) ============ -->
-  <div class="card object front">
-    <div class="corner-color"></div>
+  <!-- BLANK: Object -->
+  <div class="card object">
+    <div class="stripe"></div>
     <div class="topband">
       <div class="ctype">Object</div>
       <div class="type">Scenery power</div>
     </div>
     <div class="name" contenteditable data-ph="OBJECT NAME"></div>
-    <div class="effect" contenteditable data-ph="power triggered when YOUR Little Soldier ends a Move in contact (no opponent also touching)"></div>
-    <div class="label" style="margin-top:auto">Activates at end of a Move on contact · contested if an opponent is also touching it</div>
+    <div class="effect" contenteditable data-ph="activate at the end of a Move in contact (no opponent also touching)"></div>
+    <div class="meta">Two-sided? mark a flip-state object (Switch / Portcullis / Saloon Doors).</div>
   </div>
 
 </div>
 
 <div class="legend noprint">
   <p><b>Legend.</b>
-  <b>Def</b> (🛡, navy) — a wound lands only when hits&nbsp;&gt;&nbsp;Def; each Shield/Scout
-  token = −1 (min 0). <b>Tough</b> (♥, red) — breaks when Hearts on the card ≥ Tough.
+  <b>Def</b> 🛡 — a wound lands only when hits&nbsp;&gt;&nbsp;Def; each Shield/Scout token = −1 (min 0).
+  <b>Tough</b> ♥ — breaks when Hearts ≥ Tough.
   <b>Rank</b> — single chevron ⌃ = New Recruit (front), double ⌃⌃ = Super Soldiers (back).
-  <b>Actions</b> — every Little Soldier has Attack + Move + one Special Action; the green tag is
-  the unit's signature. <b>⚡ Ability</b> on the back activates once per Lightning rolled
-  (linear); the Move heal is universal. The 3+⚡ tier exists only on <b>Threats</b>.
+  <b>Actions</b> — every Little Soldier has Attack + Move + one Special; the green tag is the unit's signature.
+  <b>⚡ Ability</b> on the back activates once per Lightning rolled (linear); the Move heal is universal.
+  The 3+⚡ tier exists only on <b>Threats</b>.
   <b>Tactics</b> (purple) and <b>Objects</b> (teal) come from the Modules book.</p>
-  <p>Build a sheet's data in <code>../schema/soldier-sheet.schema.json</code>, validate with
-  <code>../tools/validate.py</code>, then transcribe onto a card here.</p>
+  <p>Build a sheet's data against <code>../schema/soldier-sheet.schema.json</code>, validate with
+  <code>../tools/validate.py</code>, then load it here and print.</p>
 </div>
+
+<!-- ============ renderer ============ -->
+<script type="application/json" id="demo-data">
+{ "schemaVersion": "1.2", "kind": "little_soldier", "name": "Infantry",
+  "color": "any", "stats": { "defense": 2, "toughness": 5 },
+  "specialAction": { "name": "Scout",
+    "summary": "Place up to 2 Scout tokens on opponents (-def). No valid target needed." },
+  "superSoldiers": {
+    "specialAbility": { "trigger": "per_lightning",
+      "summary": "Make 1 Move after this Attack." },
+    "moveHeal": true } }
+</script>
+<script>
+"use strict";
+const loaded = document.getElementById("loaded");
+const info = document.getElementById("info");
+
+function el(tag, cls, txt){
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (txt != null) e.textContent = txt;
+  return e;
+}
+function badge(cls, n){
+  const b = el("div", "badge " + cls);
+  b.textContent = (n == null || n === "") ? "?" : String(n);
+  return b;
+}
+function actBox(cls, tagIcon, tagText, body){
+  const a = el("div", "act " + (cls || ""));
+  const tag = el("div", "tag");
+  if (tagIcon) tag.appendChild(el("span", "icon", tagIcon));
+  tag.appendChild(document.createTextNode(tagText));
+  a.appendChild(tag);
+  a.appendChild(el("div", "body", body || ""));
+  return a;
+}
+
+function colourClass(sheet){
+  const c = sheet.color;
+  if (c === "green" || c === "yellow") return c;
+  return "green"; // default for "any"/missing — just for visual stripe colour
+}
+
+function renderSoldier(sheet, side){
+  const card = el("div", "card " + colourClass(sheet) + (side === "back" ? " back" : ""));
+  card.appendChild(el("div", "stripe"));
+
+  const top = el("div", "topband");
+  const stats = el("div", "stats");
+  stats.appendChild(badge("def", sheet.stats && sheet.stats.defense));
+  stats.appendChild(badge("tough", sheet.stats && sheet.stats.toughness));
+  top.appendChild(stats);
+  const rank = el("div", "rank");
+  rank.appendChild(el("span", "chev", side === "back" ? "⌃⌃" : "⌃"));
+  rank.appendChild(document.createTextNode(side === "back" ? "Super Soldiers" : "New Recruit"));
+  top.appendChild(rank);
+  top.appendChild(el("div", "type", "Little Soldier"));
+  card.appendChild(top);
+
+  card.appendChild(el("div", "art", sheet.figurine || "figurine / art"));
+  card.appendChild(el("div", "name", sheet.name.toUpperCase()));
+
+  const actions = el("div", "actions");
+  if (side === "back" && sheet.superSoldiers){
+    const ss = sheet.superSoldiers;
+    const ab = (ss.specialAbility && ss.specialAbility.summary) || "—";
+    actions.appendChild(actBox("ability", "⚡", "Per ⚡ Attack", ab));
+    actions.appendChild(actBox("ability", "👣", "Move",
+      ss.moveHeal === false ? "—" : "Remove 1 ♥ from this Little Soldier."));
+  } else {
+    actions.appendChild(actBox("attack", "⚔", "Attack",
+      "Declare a valid target. Roll 5 dice; reroll once (+1 reroll in red range)."));
+    actions.appendChild(actBox("move", "👣", "Move",
+      "Yellow cord from base; bend freely; place anywhere along it."));
+  }
+  const sa = sheet.specialAction || {};
+  actions.appendChild(actBox("special", "★",
+    (sa.name || "Special").toUpperCase(),
+    sa.summary || ""));
+  card.appendChild(actions);
+
+  return card;
+}
+
+function renderGeneral(sheet){
+  const card = el("div", "card general");
+  card.appendChild(el("div", "stripe"));
+  const top = el("div", "topband");
+  top.appendChild(el("div", "label", "General · " + (sheet.color || "any")));
+  top.appendChild(el("div", "type", "General"));
+  card.appendChild(top);
+  card.appendChild(el("div", "art", "General art"));
+  card.appendChild(el("div", "name", sheet.name.toUpperCase()));
+  const oa = sheet.orderAction || {};
+  card.appendChild(el("div", "effect", oa.summary
+    || "Play 1 Order token on one of your Little Soldiers currently in play."));
+  if (sheet.signatureTactics && sheet.signatureTactics.length){
+    const meta = el("div", "meta");
+    meta.innerHTML = "<b>Signature Tactics:</b> " +
+      sheet.signatureTactics.map(t => esc(t)).join(" · ");
+    card.appendChild(meta);
+  }
+  return card;
+}
+
+function renderThreat(sheet){
+  const card = el("div", "card threat");
+  card.appendChild(el("div", "stripe"));
+  const top = el("div", "topband");
+  const stats = el("div", "stats");
+  stats.appendChild(badge("def", sheet.stats && sheet.stats.defense));
+  stats.appendChild(badge("tough", sheet.stats && sheet.stats.toughness));
+  top.appendChild(stats);
+  top.appendChild(el("div", "type", "Threat"));
+  card.appendChild(top);
+  card.appendChild(el("div", "art", sheet.target || "Threat art · ⊙ Target"));
+  card.appendChild(el("div", "name", sheet.name.toUpperCase()));
+  const at = sheet.attack || {};
+  const ss = sheet.superSpecialAbility || {};
+  const ff = sheet.forceField || {};
+  const actions = el("div", "actions");
+  actions.style.gridTemplateColumns = "1fr 1fr 1.4fr";
+  actions.appendChild(actBox("attack", "", "Attack", at.summary || "—"));
+  actions.appendChild(actBox("superability", "⚡⚡⚡", "Super", ss.summary || "—"));
+  let ffText = "—";
+  if (ff.switchNumbers && ff.switchNumbers.length){
+    ffText = (ff.requiresAllSwitches ? "off when ALL switches " : "off when switch ")
+      + ff.switchNumbers.map(n => "#" + n).join(" & ") + " down";
+  }
+  actions.appendChild(actBox("", "", "Force Field", ffText));
+  card.appendChild(actions);
+  return card;
+}
+
+function renderTactics(sheet){
+  const card = el("div", "card tactics");
+  card.appendChild(el("div", "stripe"));
+  const top = el("div", "topband");
+  const cost = el("div", "cost", sheet.orderCondition == null ? "—" : String(sheet.orderCondition));
+  top.appendChild(cost);
+  top.appendChild(el("div", "ctype", (sheet.cardType || "—") +
+    (sheet.cardType === "reaction" ? " · reaction" : "")));
+  top.appendChild(el("div", "type", "Tactics"));
+  card.appendChild(top);
+  card.appendChild(el("div", "name", sheet.name.toUpperCase()));
+  let txt = sheet.summary || "";
+  if (sheet.cardType === "reaction" && sheet.reactionTrigger){
+    txt = "Play when: " + sheet.reactionTrigger + "\n\n" + txt;
+  }
+  const eff = el("div", "effect");
+  eff.style.whiteSpace = "pre-line";
+  eff.textContent = txt;
+  card.appendChild(eff);
+  if (sheet.owner){
+    card.appendChild(el("div", "meta", "Signature of: " + sheet.owner));
+  }
+  return card;
+}
+
+function renderObject(sheet){
+  const card = el("div", "card object");
+  card.appendChild(el("div", "stripe"));
+  const top = el("div", "topband");
+  top.appendChild(el("div", "ctype", "Object" + (sheet.twoSided ? " · two-sided" : "")));
+  top.appendChild(el("div", "type", "Scenery"));
+  card.appendChild(top);
+  card.appendChild(el("div", "name", sheet.name.toUpperCase()));
+  card.appendChild(el("div", "effect", sheet.summary || ""));
+  return card;
+}
+
+function esc(s){
+  return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+}
+
+function renderCandidates(sheet){
+  if (!sheet.figureCandidates || !sheet.figureCandidates.length) return null;
+  const wrap = el("div", "fc");
+  wrap.appendChild(el("h4", null, "Figure candidates (" + sheet.figureCandidates.length + ")"));
+  const ul = el("ul");
+  for (const c of sheet.figureCandidates){
+    const li = el("li");
+    li.appendChild(el("span", "num", c.collectorNumber ? "#" + c.collectorNumber : ""));
+    li.appendChild(el("span", "nm", c.name));
+    if (c.faction || c.rarity || c.set){
+      const meta = " — " + [c.set, c.rarity, c.faction].filter(Boolean).join(" · ");
+      li.appendChild(el("span", "fac", meta));
+    }
+    ul.appendChild(li);
+  }
+  wrap.appendChild(ul);
+  return wrap;
+}
+
+function renderSheet(sheet){
+  const group = document.createDocumentFragment();
+  let primary = null;
+  try {
+    switch (sheet.kind){
+      case "little_soldier":
+        primary = renderSoldier(sheet, "front");
+        group.appendChild(primary);
+        if (sheet.superSoldiers) group.appendChild(renderSoldier(sheet, "back"));
+        break;
+      case "general":      primary = renderGeneral(sheet);  group.appendChild(primary); break;
+      case "threat":       primary = renderThreat(sheet);   group.appendChild(primary); break;
+      case "tactics_card": primary = renderTactics(sheet);  group.appendChild(primary); break;
+      case "object":       primary = renderObject(sheet);   group.appendChild(primary); break;
+      default: {
+        const errCard = el("div", "card");
+        errCard.appendChild(el("div", "err", "Unknown kind: " + esc(String(sheet.kind))));
+        group.appendChild(errCard);
+        return group;
+      }
+    }
+  } catch (e) {
+    const errCard = el("div", "card");
+    errCard.appendChild(el("div", "err", "Render error: " + esc(e.message)));
+    return errCard;
+  }
+  const fc = renderCandidates(sheet);
+  if (fc && primary && (sheet.kind === "little_soldier" || sheet.kind === "general"
+      || sheet.kind === "threat")){
+    // attach candidates panel under the (first) card of this sheet
+    primary.style.borderBottomLeftRadius = "0";
+    primary.style.borderBottomRightRadius = "0";
+    primary.insertAdjacentElement("afterend", fc);
+  }
+  return group;
+}
+
+function handleSheet(parsed, sourceLabel){
+  if (!parsed || typeof parsed !== "object" || !parsed.kind || !parsed.name){
+    info.innerHTML = '<span class="err">Skipped ' + esc(sourceLabel)
+      + ' — not a sheet (no kind/name).</span>';
+    return;
+  }
+  loaded.appendChild(renderSheet(parsed));
+}
+
+document.getElementById("files").addEventListener("change", async e => {
+  for (const file of e.target.files){
+    try {
+      const text = await file.text();
+      handleSheet(JSON.parse(text), file.name);
+    } catch (err){
+      info.innerHTML = '<span class="err">Could not parse '
+        + esc(file.name) + ': ' + esc(err.message) + '</span>';
+    }
+  }
+  info.textContent = "Loaded " + loaded.children.length + " card element(s).";
+  e.target.value = "";
+});
+
+document.getElementById("clear").addEventListener("click", () => {
+  loaded.innerHTML = "";
+  info.textContent = "Cleared.";
+});
+
+document.getElementById("renderPaste").addEventListener("click", () => {
+  const raw = document.getElementById("paste").value.trim();
+  if (!raw) return;
+  try { handleSheet(JSON.parse(raw), "(pasted)"); }
+  catch (err){
+    info.innerHTML = '<span class="err">Parse error: ' + esc(err.message) + '</span>';
+  }
+});
+
+document.getElementById("demo").addEventListener("click", () => {
+  const raw = document.getElementById("demo-data").textContent;
+  try { handleSheet(JSON.parse(raw), "(demo)"); }
+  catch (err){ info.textContent = "Demo failed: " + err.message; }
+});
+</script>
 
 </body>
 </html>
